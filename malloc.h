@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/11 17:19:01 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/11 17:50:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@
 #include <unistd.h>
 #include <stdio.h>
 
-typedef struct s_header *t_header;
+typedef struct s_header{
+  size_t          size;
+  struct s_header *next;
+  int             free;
+} t_header;
 
-struct s_header{
-  size_t  size;
-  t_header  next;
-  int     free;
-};
+typedef struct s_map{
+  struct s_header *header;
+  struct s_map    *next;
+  size_t          size;
+  size_t          count;
+} t_map;
+
+typedef struct s_glob{
+  t_map *tiny;
+  t_map *small;
+  t_map *large;
+} t_glob;
+
 
 void free(void *ptr);
 void *malloc(size_t size);
