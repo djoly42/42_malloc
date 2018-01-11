@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/11 16:37:13 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/11 17:19:01 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ void *malloc(size_t size);
 void *ft_realloc(void *ptr, size_t size);
 void ft_show_alloc_mem(void);
 
+void ft_putchar(char c);
+void ft_putnbr(int n);
+size_t ft_strlen(const char *s);
+void ft_putstr(char const *str);
 
 #endif

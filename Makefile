@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/01/11 16:39:30 by djoly            ###   ########.fr        #
+#    Updated: 2018/01/11 17:19:20 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,12 @@ ifeq ($(HOSTTYPE),)
 endif
 
 NAME	= libft_malloc_$(HOSTTYPE).so
-FILES	= malloc.c
+FILES	= malloc.c \
+				ft_putchar.c\
+				ft_putnbr.c\
+				ft_putstr.c\
+				ft_strlen.c
+
 SRCS	= $(addprefix src/, $(FILES))
 OBJS	= $(SRCS:src/%.c=.obj/%.o)
 INC		= -I include -I .
