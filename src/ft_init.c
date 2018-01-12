@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 15:59:30 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/12 17:05:35 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ void ft_print_zone(t_zone* zone)
   t_header* tmp;
   int i;
   ft_putstr("print zone \n");
-  tmp = zone->header;
+//  tmp = zone->header;
+ft_puthexa((unsigned  long)(glob.tiny->header));
+
+  tmp = glob.tiny->header;
   i = 0;
   while (tmp != NULL){
     ft_putnbr(i);
     ft_putstr("\t\t");
     ft_puthexa((unsigned long)(tmp));
+    ft_putstr("\t");
+    ft_putnbr(tmp->free);
+    ft_putstr("\t");
+    ft_putnbr(tmp->size);
     ft_putstr("\n");
+
+
     tmp = tmp->next;
     i++;
   }
@@ -37,10 +46,15 @@ void ft_print_zone(t_zone* zone)
 }
 
 void ft_init_list_head(int type, t_zone* add_zone){
+  ft_putstr("add_zone :");
+
+  ft_puthexa((unsigned  long)(add_zone));
+  ft_putstr("\n");
+
   int i;
   t_header* tmp;
   if (type == TINY){
-    ft_putstr("header :");
+    ft_putstr("header first :");
     ft_puthexa((unsigned  long)(glob.tiny->header));
     glob.tiny->header = (void *) add_zone;
     ft_putstr(" --- ");
@@ -49,23 +63,33 @@ void ft_init_list_head(int type, t_zone* add_zone){
   }
   i = 1;
   tmp = glob.tiny->header;
+  ft_putstr("header first again :");
+  ft_puthexa((unsigned  long)(glob.tiny->header));
+  ft_putstr("\n");
   tmp->free = 1;
   tmp->size = 0;
+  ft_putstr("header first again :");
+  ft_puthexa((unsigned  long)(glob.tiny->header));
+  ft_putstr("\n");
   while(i < 100)
   {
 
     ft_putstr("header :");
     ft_puthexa((unsigned  long)(tmp->next));
-    tmp->next = (void*)tmp + 152;
+    tmp->next = (void*)tmp + META + TINY_SIZE;
     ft_putstr(" --- ");
     ft_puthexa((unsigned  long)(tmp->next));
     ft_putstr("\n");
     tmp = tmp->next;
     tmp->free = 1;
     tmp->size = 0;
+
     i++;
   }
   tmp->next = NULL;
+  ft_putstr("header first again :");
+  ft_puthexa((unsigned  long)(glob.tiny->header));
+  ft_putstr("\n");
 
   ft_print_zone(glob.tiny);
 
@@ -85,9 +109,6 @@ int ft_init_zone(int size_type)
       return FALSE;
     }
     ft_init_list_head(TINY, glob.tiny);
-
-    ft_puthexa((unsigned  long)(glob.tiny));
-      ft_putstr("\nfin exa \n");
   }
   else if(size_type == SMALL)
   {
@@ -107,7 +128,7 @@ int ft_init_zone(int size_type)
       return FALSE;
     }
   }
-    return TRUE;
+  return TRUE;
 }
 
 int ft_init(size_t size){
