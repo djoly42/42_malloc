@@ -6,12 +6,35 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 15:02:50 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/12 15:59:30 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+void ft_print_zone(t_zone* zone)
+{
+  t_header* tmp;
+  int i;
+  ft_putstr("print zone \n");
+  tmp = zone->header;
+  i = 0;
+  while (tmp != NULL){
+    ft_putnbr(i);
+    ft_putstr("\t\t");
+    ft_puthexa((unsigned long)(tmp));
+    ft_putstr("\n");
+    tmp = tmp->next;
+    i++;
+  }
+
+  ft_putstr("zone debut fin :");
+  ft_puthexa((unsigned long)zone);
+  ft_putstr(" ");
+  ft_puthexa((unsigned long)((void*)zone + PAGE_SIZE * 4));
+  ft_putstr("\n");
+
+}
 
 void ft_init_list_head(int type, t_zone* add_zone){
   int i;
@@ -24,15 +47,27 @@ void ft_init_list_head(int type, t_zone* add_zone){
     ft_puthexa((unsigned  long)(glob.tiny->header));
     ft_putstr("\n");
   }
-  i = 0;
+  i = 1;
+  tmp = glob.tiny->header;
+  tmp->free = 1;
+  tmp->size = 0;
   while(i < 100)
   {
-    tmp = glob.tiny->header;
-    glob.tiny->header
 
-
+    ft_putstr("header :");
+    ft_puthexa((unsigned  long)(tmp->next));
+    tmp->next = (void*)tmp + 152;
+    ft_putstr(" --- ");
+    ft_puthexa((unsigned  long)(tmp->next));
+    ft_putstr("\n");
+    tmp = tmp->next;
+    tmp->free = 1;
+    tmp->size = 0;
     i++;
   }
+  tmp->next = NULL;
+
+  ft_print_zone(glob.tiny);
 
 }
 
