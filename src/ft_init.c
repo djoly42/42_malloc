@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 17:05:35 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/12 17:26:13 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void ft_print_zone(t_zone* zone)
 ft_puthexa((unsigned  long)(glob.tiny->header));
 
   tmp = glob.tiny->header;
+  ft_puthexa((unsigned long)(tmp));
+  ft_putstr("\t:");
+  ft_putnbr(tmp->free);
+  ft_putstr("\t:");
+  ft_putnbr(tmp->size);
+  ft_putstr("\n");
   i = 0;
   while (tmp != NULL){
     ft_putnbr(i);
@@ -53,6 +59,8 @@ void ft_init_list_head(int type, t_zone* add_zone){
 
   int i;
   t_header* tmp;
+  t_header* tmpfirst;
+
   if (type == TINY){
     ft_putstr("header first :");
     ft_puthexa((unsigned  long)(glob.tiny->header));
@@ -63,19 +71,33 @@ void ft_init_list_head(int type, t_zone* add_zone){
   }
   i = 1;
   tmp = glob.tiny->header;
+  tmpfirst = glob.tiny->header;
+
   ft_putstr("header first again :");
   ft_puthexa((unsigned  long)(glob.tiny->header));
+  ft_putstr("\n");
+  ft_putstr("free");
+  ft_puthexa((unsigned  long)(&tmp->free));
+  ft_putstr("\n");
+  ft_putstr("size");
+  ft_puthexa((unsigned  long)(&tmp->size));
   ft_putstr("\n");
   tmp->free = 1;
   tmp->size = 0;
   ft_putstr("header first again :");
   ft_puthexa((unsigned  long)(glob.tiny->header));
   ft_putstr("\n");
+  //return ;
   while(i < 100)
   {
 
     ft_putstr("header :");
-    ft_puthexa((unsigned  long)(tmp->next));
+    ft_puthexa((unsigned  long)(tmp));
+    ft_putstr("\t");
+    ft_putnbr(tmp->free);
+    ft_putstr("\t");
+    ft_putnbr(tmp->size);
+    ft_putstr("\t");
     tmp->next = (void*)tmp + META + TINY_SIZE;
     ft_putstr(" --- ");
     ft_puthexa((unsigned  long)(tmp->next));
@@ -87,6 +109,7 @@ void ft_init_list_head(int type, t_zone* add_zone){
     i++;
   }
   tmp->next = NULL;
+  glob.tiny->header = tmpfirst;
   ft_putstr("header first again :");
   ft_puthexa((unsigned  long)(glob.tiny->header));
   ft_putstr("\n");
