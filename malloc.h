@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 13:55:46 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/12 15:00:13 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define SMALL_SIZE 1024
 #define META sizeof(struct s_header)
 
-typedef struct s_header{
+typedef struct s_header{ // 24
   size_t          size;
   struct s_header *next;
   int             free;
@@ -54,11 +54,11 @@ void free(void *ptr);
 void *malloc(size_t size);
 void *ft_realloc(void *ptr, size_t size);
 void ft_show_alloc_mem(void);
-
-boole ft_init(size_t size);
+int   ft_init(size_t size);
 
 
 void ft_putchar(char c);
+void ft_puthexa(size_t ptr);
 void ft_putnbr(int n);
 size_t ft_strlen(const char *s);
 void ft_putstr(char const *str);

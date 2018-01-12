@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/01/12 13:41:37 by djoly            ###   ########.fr        #
+#    Updated: 2018/01/12 14:17:43 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME	= libft_malloc_$(HOSTTYPE).so
 FILES	= malloc.c \
 				ft_init.c\
 				ft_putchar.c\
+				ft_puthexa.c\
 				ft_putnbr.c\
 				ft_putstr.c\
 				ft_strlen.c

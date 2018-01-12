@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 13:50:51 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/12 14:05:08 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void 	*malloc(size_t size){
 
   if(ft_init(size))
   {
+    ft_putstr("error in init");
     return NULL;
   }
 
