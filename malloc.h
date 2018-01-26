@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:28:56 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/26 10:55:59 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 //152
 #define PAGE_SIZE getpagesize() //4096
@@ -55,18 +56,17 @@ void free(void *ptr);
 void *malloc(size_t size);
 void *ft_realloc(void *ptr, size_t size);
 void ft_show_alloc_mem(void);
-int						ft_printf(const char *format, ...);
 
 t_header* ft_find_empty_head(size_t size);
-int   ft_init(size_t size);
+int   ft_init_malloc(size_t size);
 t_header* ft_set_header(t_header* head, size_t size);
 
-
+/*
 
 void ft_putchar(char c);
 void ft_puthexa(size_t ptr);
 void ft_putnbr(int n);
 size_t ft_strlen(const char *s);
 void ft_putstr(char const *str);
-
+*/
 #endif

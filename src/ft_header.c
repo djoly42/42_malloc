@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 16:48:36 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/26 10:39:04 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_header* ft_find_empty_head(size_t size){
 
 t_header* ft_set_header(t_header* head, size_t size)
 {
-  ft_putstr("set_free\n");
+  ft_printf("set_free\n");
   head->free = 0;
-  ft_putstr("set_size\n");
+  ft_printf("set_size\n");
   head->size = size;
   return head;
 }
