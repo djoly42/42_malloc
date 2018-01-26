@@ -1,47 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:01 by djoly            ###   ########.fr       */
+/*   Created: 2015/12/01 20:05:36 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/09 16:14:42 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "malloc.h"
-//#include
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *str)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 		i++;
 	return (i);
 }
 
-void	ft_putstr(char const *str)
+int		ft_putstr2(char const *s, int len)
 {
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
+	int		i;
+
+	i = 0;
+	while (s[i] != '\0' && i < len)
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
 }
 
-int main (int ac, char **av) {
+int		ft_putstr(char const *s)
+{
+	int		i;
 
-  char *m;
-  m = malloc(10);
-
-  ft_putstr("fin malloc\n");
-  m = "WHAT";
-
-  //m = malloc(10);
-
-  //free(m);
-
-  return 0;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
 }

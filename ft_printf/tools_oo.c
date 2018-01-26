@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   tools_oo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:01 by djoly            ###   ########.fr       */
+/*   Created: 2016/03/10 13:08:44 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/10 13:09:14 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "malloc.h"
-//#include
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int					ft_putoo(unsigned long int nbr)
 {
-	size_t	i;
+	int	ret;
 
-	i = 0;
-	while (s[i] != '\0')
+	ret = 0;
+	if (nbr > 7)
+	{
+		ret = ret + ft_putoo(nbr / 8);
+		ret = ret + ft_putoo(nbr % 8);
+	}
+	else
+		ret = ret + ft_putchar(nbr + '0');
+	return (ret);
+}
+
+int					ft_nbrlenoo(unsigned long int nb)
+{
+	int i;
+
+	i = 1;
+	while (nb /= 8)
 		i++;
 	return (i);
-}
-
-void	ft_putstr(char const *str)
-{
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
-}
-
-int main (int ac, char **av) {
-
-  char *m;
-  m = malloc(10);
-
-  ft_putstr("fin malloc\n");
-  m = "WHAT";
-
-  //m = malloc(10);
-
-  //free(m);
-
-  return 0;
 }

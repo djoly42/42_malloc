@@ -1,47 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   fonct_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:01 by djoly            ###   ########.fr       */
+/*   Created: 2016/03/02 13:54:24 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/09 17:20:26 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "malloc.h"
-//#include
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+void		fonct_error(t_env *env)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_putstr(char const *str)
-{
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
-}
-
-int main (int ac, char **av) {
-
-  char *m;
-  m = malloc(10);
-
-  ft_putstr("fin malloc\n");
-  m = "WHAT";
-
-  //m = malloc(10);
-
-  //free(m);
-
-  return 0;
+	if (FNDFLAGS[2] == -1 && NBR != -1)
+	{
+		if (FNDFLAGS[1] == 1)
+			RET = RET + ft_putzero2(NBR - 1);
+		else
+			RET = RET + ft_putspace(NBR - 1);
+	}
+	RET = RET + ft_putchar(FORMAT[IFOR]);
+	if (FNDFLAGS[2] == 1 && NBR != -1)
+		RET = RET + ft_putspace(NBR - 1);
 }

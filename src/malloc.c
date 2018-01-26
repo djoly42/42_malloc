@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/12 16:50:52 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/26 10:29:38 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void 	*malloc(size_t size)
 {
+  ft_printf("woupi printf");
   t_header* tmp;
 
   if (size <= 0 || !ft_init(size))

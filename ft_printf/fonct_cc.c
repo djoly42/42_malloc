@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   fonct_cc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:01 by djoly            ###   ########.fr       */
+/*   Created: 2016/03/09 10:02:20 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/09 20:18:21 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "malloc.h"
-//#include
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+static void		ft_check_env(t_env *env)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	if (NBR != -1)
+	{
+		if (FNDFLAGS[1] == 1 && FNDFLAGS[2] == -1)
+			ft_putzero(env);
+		else
+			RET = RET + ft_putspace(env->nbr - 1);
+	}
 }
 
-void	ft_putstr(char const *str)
+int				fonct_cc(t_env *env)
 {
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
-}
-
-int main (int ac, char **av) {
-
-  char *m;
-  m = malloc(10);
-
-  ft_putstr("fin malloc\n");
-  m = "WHAT";
-
-  //m = malloc(10);
-
-  //free(m);
-
-  return 0;
+	if (FNDFLAGS[2] == 1)
+	{
+		RET = RET + ft_put_w_char((wchar_t)ARG);
+		ft_check_env(env);
+	}
+	else
+	{
+		ft_check_env(env);
+		RET = RET + ft_put_w_char((wchar_t)ARG);
+	}
+	return (1);
 }

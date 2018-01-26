@@ -1,47 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:01 by djoly            ###   ########.fr       */
+/*   Created: 2015/12/01 14:28:37 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/09 16:27:19 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "malloc.h"
-//#include
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
+	int i;
 
 	i = 0;
 	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
 		i++;
-	return (i);
-}
-
-void	ft_putstr(char const *str)
-{
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
-}
-
-int main (int ac, char **av) {
-
-  char *m;
-  m = malloc(10);
-
-  ft_putstr("fin malloc\n");
-  m = "WHAT";
-
-  //m = malloc(10);
-
-  //free(m);
-
-  return 0;
+	}
+	if ((char)c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }

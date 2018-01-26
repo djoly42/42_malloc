@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:26:01 by djoly            ###   ########.fr       */
+/*   Created: 2015/12/01 19:59:32 by djoly             #+#    #+#             */
+/*   Updated: 2016/03/10 14:08:29 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-#include "malloc.h"
-//#include
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+int		ft_nbrlenll(long long unsigned int nb)
 {
-	size_t	i;
+	int i;
 
-	i = 0;
-	while (s[i] != '\0')
+	i = 1;
+	while (nb /= 10)
 		i++;
 	return (i);
 }
 
-void	ft_putstr(char const *str)
+int		ft_nbrlen(int nb)
 {
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
-}
+	int i;
 
-int main (int ac, char **av) {
-
-  char *m;
-  m = malloc(10);
-
-  ft_putstr("fin malloc\n");
-  m = "WHAT";
-
-  //m = malloc(10);
-
-  //free(m);
-
-  return 0;
+	i = 1;
+	if (nb < 0)
+	{
+		i++;
+		nb = -nb;
+	}
+	while (nb /= 10)
+		i++;
+	return (i);
 }
