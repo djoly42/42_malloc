@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 10:47:55 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/26 13:35:48 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,14 @@
 #include "malloc.h"
 //#include
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	ft_putstr(char const *str)
-{
-	if (!str)
-		return ;
-	write(1, str, ft_strlen(str));
-}
 
 int main (int ac, char **av) {
 
   char *m;
   m = malloc(10);
-
-  ft_putstr("fin malloc\n");
+	ft_printf("main %d: end malloc\n", __LINE__);
   m = "WHAT";
+	ft_printf("test %d: %p ", __LINE__, m);
 
   //m = malloc(10);
 

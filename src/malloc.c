@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 11:26:10 by djoly            ###   ########.fr       */
+/*   Updated: 2018/01/26 13:34:32 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 void 	*malloc(size_t size)
 {
-  ft_printf("woupi printf");
+  ft_printf("malloc %d: Go malloc\n", __LINE__);
   t_header* tmp;
 
   if (size <= 0 || !ft_init_malloc(size))
     return NULL;
 
-  ft_printf("ft_find_empty_head\n");
-  if(!(tmp = ft_find_empty_head(size)))
+  //ft_printf("ft_find_empty_head\n");
+  if((tmp = ft_find_empty_head(size)) != NULL)
   {
-    ft_printf( "ft_set_header %p \n",(unsigned  long)(tmp));
+    //ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
 
     tmp = ft_set_header(tmp, size);
-    ft_printf("fin ft_set_header\n");
+    ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
     return (void*) tmp + TINY_SIZE;
   }
+  else
+  {
+    ft_printf("malloc: ft_find_empty_head NULL\n");
+  }
+
 
   //LOG
   if (size < TINY_SIZE)
