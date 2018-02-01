@@ -6,102 +6,67 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 11:25:08 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/01 17:00:26 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+void ft_print_head(t_header* h)
+{
+  ft_printf("ft_init %d: %X\t%d\t%d\n", __LINE__,
+               (unsigned long)(h),h->free,h->size);
+
+}
+
 void ft_print_zone(t_zone* zone)
 {
+  ft_printf("ft_init %d: print zone \n", __LINE__);
   t_header* tmp;
   int i;
-  ft_printf("print zone \n");
-//  tmp = zone->header;
-ft_printf("%X", (unsigned  long)(glob.tiny->header));
-
+  tmp = zone->header;
+  //ft_printf("ft_init %d: i\theader\ttmp\tfree\tsize\n", __LINE__),
+  // ft_printf("ft_init %d: %X     %X\t%d\t%d\n", __LINE__, (unsigned  long)(glob.tiny->header),
+  //             (unsigned long)(tmp),tmp->free,tmp->size);
   tmp = glob.tiny->header;
-  ft_printf("%X", (unsigned long)(tmp));
-  ft_printf("\t:");
-  ft_printf("%d", tmp->free);
-  ft_printf("\t:");
-  ft_printf("%d", tmp->size);
-  ft_printf("\n");
   i = 0;
   while (tmp != NULL){
-    ft_printf("%d", i);
-    ft_printf("\t\t");
-    ft_printf("%p", (unsigned long)(tmp));
-    ft_printf("\t");
-    ft_printf("%d", tmp->free);
-    ft_printf("\t");
-    ft_printf("%d", tmp->size);
-    ft_printf("\n");
-
-
+  ft_printf("ft_init %d: %i\t%X\t%X\t%d\t%d\n", __LINE__, i,  (unsigned  long)(glob.tiny->header),
+               (unsigned long)(tmp),tmp->free,tmp->size);
     tmp = tmp->next;
     i++;
   }
 
-  ft_printf("zone debut fin :");
-  ft_printf("%p", (unsigned long)zone);
-  ft_printf(" ");
-  ft_printf("%p", (unsigned long)((void*)zone + PAGE_SIZE * 4));
-  ft_printf("\n");
+  ft_printf("ft_init %d: zone debut fin : %p %p\n", __LINE__, (unsigned long)zone, ((unsigned long)((void*)zone + PAGE_SIZE * 4)) );
 
 }
 
 void ft_init_list_head(int type, t_zone* add_zone){
-  ft_printf("add_zone :");
-
-  ft_printf("%p", (unsigned  long)(add_zone));
-  ft_printf("\n");
+  ft_printf("ft_init %d: ft_list_head %p\n", __LINE__,(unsigned  long)(add_zone));
 
   int i;
   t_header* tmp;
   t_header* tmpfirst;
 
   if (type == TINY){
-    ft_printf("header first :");
-    ft_printf("%X", (unsigned  long)(glob.tiny->header));
+    //ft_printf("ft_init %d: header first: %X\n", __LINE__,(unsigned  long)(glob.tiny->header));
     glob.tiny->header = (void *) add_zone;
-    ft_printf(" --- ");
-    ft_printf("%X", (unsigned  long)(glob.tiny->header));
-    ft_printf("\n");
+    //ft_printf("ft_init %d: header first: %X\n", __LINE__,(unsigned  long)(glob.tiny->header));
   }
   i = 1;
   tmp = glob.tiny->header;
   tmpfirst = glob.tiny->header;
 
-  ft_printf("header first again :");
-  ft_printf("%X", (unsigned  long)(glob.tiny->header));
-  ft_printf("\n");
-  ft_printf("free");
-  ft_printf("%X", (unsigned  long)(&tmp->free));
-  ft_printf("\n");
-  ft_printf("size");
-  ft_printf("%X", (unsigned  long)(&tmp->size));
-  ft_printf("\n");
+  //ft_printf("ft_init %d:header first again: %X free: %X size: %X\n", __LINE__, (unsigned  long)(glob.tiny->header), (unsigned  long)(&tmp->free),
+    //          (unsigned  long)(&tmp->size));
   tmp->free = 1;
   tmp->size = 0;
-  ft_printf("header first again :");
-  ft_printf("%X", (unsigned  long)(glob.tiny->header));
-  ft_printf("\n");
-  //return ;
   while(i < 100)
   {
 
-    ft_printf("header :");
-    ft_printf("%p", (unsigned  long)(tmp));
-    ft_printf("\t");
-    ft_printf("%d", tmp->free);
-    ft_printf("\t");
-    ft_printf("%d", tmp->size);
-    ft_printf("\t");
+    //ft_printf("ft_init %d: header : %p \t %d \t %d \t", __LINE__ , (unsigned  long)(tmp),  tmp->free, tmp->size );
     tmp->next = (void*)tmp + META + TINY_SIZE;
-    ft_printf(" --- ");
-    ft_printf("%X", (unsigned  long)(tmp->next));
-    ft_printf("\n");
+    //ft_printf(" --- %X\n",(unsigned  long)(tmp->next));
     tmp = tmp->next;
     tmp->free = 1;
     tmp->size = 0;
@@ -110,12 +75,9 @@ void ft_init_list_head(int type, t_zone* add_zone){
   }
   tmp->next = NULL;
   glob.tiny->header = tmpfirst;
-  ft_printf("header first again :");
-  ft_printf("%X", (unsigned  long)(glob.tiny->header));
-  ft_printf("\n");
+  ft_printf("ft_init %d: header first again : %X\n", __LINE__, (unsigned  long)(glob.tiny->header));
 
   ft_print_zone(glob.tiny);
-
 }
 
 int ft_init_zone(int size_type)
@@ -155,12 +117,12 @@ int ft_init_zone(int size_type)
 }
 
 int ft_init_malloc(size_t size){
+    ft_printf("ft_init %d : ft_init_malloc\n", __LINE__);
 
   if ((size < TINY_SIZE) && (glob.tiny == NULL))
   {
     return ft_init_zone(TINY);
     //base = mmap(0, getpagesize() * 4, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
   }
-    ft_printf("end ft_init\n");
     return TRUE;
 }

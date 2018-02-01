@@ -6,20 +6,26 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 13:17:15 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/01 17:01:03 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+//ft_printf("line: %d\n", __LINE__);
+
 t_header* ft_find_empty_head(size_t size){
+  ft_printf("ft_header %d: ft_find_empty_head\n", __LINE__);
   t_header * tmp;
-  //ft_printf("ft_header: ft_find_empty_head size: %d, tiny: %d\n", size, TINY_SIZE);
 
   if (size < TINY_SIZE){
+    ft_printf("line: %d\n", __LINE__);
     tmp = glob.tiny->header;
-    //ft_printf("ft_header: ft_find_empty_head tmp %p\n", tmp);
+    ft_printf("line: %d\n", __LINE__);
+    ft_print_head(tmp);
+    ft_printf("line: %d\n", __LINE__);
     while (tmp != NULL){
+      ft_printf("line: %d\n", __LINE__);
         if(tmp->free == 1){
           ft_printf("ft_header: ft_find_empty_head return tmp\n");
           return tmp;

@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/01/26 13:34:32 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/01 16:48:56 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void 	*malloc(size_t size)
 {
-  ft_printf("malloc %d: Go malloc\n", __LINE__);
+  ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
   t_header* tmp;
 
   if (size <= 0 || !ft_init_malloc(size))
     return NULL;
 
-  //ft_printf("ft_find_empty_head\n");
+  //ft_printf("malloc %d: ft_find_empty_head\n", __LINE__);
   if((tmp = ft_find_empty_head(size)) != NULL)
   {
     //ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
@@ -48,19 +48,7 @@ void 	*malloc(size_t size)
   ft_printf("\nmeta : ");
 
   ft_printf("%d", META);
-
-
-
-  (void)size;
-
   return NULL;
-
-  ft_printf("my ma lloc \n");
-  ft_printf("%d",sizeof(struct s_header));
-  void *base;
-
-  base = mmap(0, getpagesize() * 4, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
-  return base;
 }
 
 void free(void *ptr){
