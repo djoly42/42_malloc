@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/01 17:00:26 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/01 17:48:35 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,17 @@
 
 void ft_print_head(t_header* h)
 {
-  ft_printf("ft_init %d: %X\t%d\t%d\n", __LINE__,
-               (unsigned long)(h),h->free,h->size);
+  ft_printf("ft_init %d: ft_print_head \n", __LINE__);
+  if(h == NULL)
+  {
+    ft_printf("ft_init %d: h null\n", __LINE__);
+  }
+  ft_printf("ft_init %d:", __LINE__);
+  ft_printf(" %X\t", (unsigned long)(h));
+  ft_printf("%d\n", h->size);
+  ft_printf("%d\t", h->free);
+  // ft_printf("ft_init %d: %X\t%d\t%d\n", __LINE__,(unsigned long)(h),
+              // h->free,h->size);
 
 }
 
@@ -25,7 +34,7 @@ void ft_print_zone(t_zone* zone)
   t_header* tmp;
   int i;
   tmp = zone->header;
-  //ft_printf("ft_init %d: i\theader\ttmp\tfree\tsize\n", __LINE__),
+  ft_printf("ft_init %d: i\theader\ttmp\tfree\tsize\n", __LINE__),
   // ft_printf("ft_init %d: %X     %X\t%d\t%d\n", __LINE__, (unsigned  long)(glob.tiny->header),
   //             (unsigned long)(tmp),tmp->free,tmp->size);
   tmp = glob.tiny->header;
@@ -70,7 +79,6 @@ void ft_init_list_head(int type, t_zone* add_zone){
     tmp = tmp->next;
     tmp->free = 1;
     tmp->size = 0;
-
     i++;
   }
   tmp->next = NULL;

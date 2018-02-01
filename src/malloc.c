@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/01 16:48:56 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/01 17:49:12 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void 	*malloc(size_t size)
     //ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
 
     tmp = ft_set_header(tmp, size);
-    ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
+    ft_printf("malloc %d: tmp: %p return malloc: %p\n", __LINE__, tmp, ((void*) tmp + TINY_SIZE));
+    ft_printf("-----------\n");
+
+  ft_print_zone(glob.tiny);
     return (void*) tmp + TINY_SIZE;
   }
   else
