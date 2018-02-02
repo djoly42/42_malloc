@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/01 17:49:34 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/02 11:34:30 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <stdio.h>
+
+#include <stdlib.h> /// <<<<<<<<<DELETE
 #include "../ft_printf/ft_printf.h"
 
 //152
@@ -32,8 +34,8 @@
 
 typedef struct s_header{ // 24
   size_t          size;
-  struct s_header *next;
   int             free;
+  struct s_header *next;
 } t_header;
 
 typedef struct s_zone{
@@ -63,6 +65,7 @@ t_header* ft_set_header(t_header* head, size_t size);
 
 void ft_print_head(t_header* h);
 void ft_print_zone(t_zone* zone);
+void ft_print_data(void *p);
 
 /*
 
