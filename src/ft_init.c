@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 15:38:05 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/02 16:14:23 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void ft_print_zone(t_zone* zone)
 
 }
 
+void ft_init_current_list()
 void ft_init_list_head(int type, t_zone* add_zone){
   ft_printf("ft_init %d: ft_list_head %p\n", __LINE__,(unsigned  long)(add_zone));
 
@@ -155,9 +156,20 @@ int ft_init_zone(int size_type)
   return TRUE;
 }
 
-int ft_init_malloc(size_t size){
+int ft_init_malloc(size_t size, int i_size){
     ft_printf("ft_init %d : ft_init_malloc: size\n", __LINE__, size);
+    int size_mmap;
 
+    if(glob.zone[i_size] == NULL)
+    {
+      size_mmap = ft_size_mmap(size, i_size);
+      if (!(glob.zone[i_size] = mmap(0, PAGE_SIZE * 26, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
+      {
+      ft_printf("error in mmap");
+      return FALSE;
+    }
+      return
+    }
   if ((size < TINY_SIZE) && (glob.tiny == NULL))
   {
     return ft_init_zone(TINY);

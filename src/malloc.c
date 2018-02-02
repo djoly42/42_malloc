@@ -6,18 +6,36 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 14:43:23 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/02 16:08:24 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+int   ft_size(size_t size)
+{
+  int i;
+
+  i = -1;
+  if (size < TINY_SIZE)
+    i = 0;
+  else if (size >= TINY_SIZE && size < SMALL_SIZE)
+    i = 1;
+  else
+    i = 2;
+  ft_printf("malloc %d: tab size: %d\n", __LINE__, i);
+  return i;
+}
+
 void 	*malloc(size_t size)
 {
+  int i_size;
+
+  i_size = ft_size(size);
   ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
   t_header* tmp;
 
-  if (size <= 0 || !ft_init_malloc(size))
+  if (size <= 0 || !ft_init_malloc(size, i_size))
     return NULL;
 
   //ft_print_zone(glob.tiny);

@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 15:51:57 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/02 16:08:40 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 //152
 #define PAGE_SIZE getpagesize() //4096
-#define TINY 1
-#define SMALL 2
-#define LARGE 3
+#define TINY 0
+#define SMALL 1
+#define LARGE 2
 #define TRUE 1
 #define FALSE 0
 
@@ -46,9 +46,7 @@ typedef struct s_zone{
 } t_zone;
 
 typedef struct s_glob{
-  t_zone *tiny;
-  t_zone *small;
-  t_zone *large;
+  t_zone zone[3];
 } t_glob;
 
 
@@ -60,7 +58,7 @@ void *ft_realloc(void *ptr, size_t size);
 void ft_show_alloc_mem(void);
 
 t_header* ft_find_empty_head(size_t size);
-int   ft_init_malloc(size_t size);
+int   ft_init_malloc(size_t size, i_size);
 t_header* ft_set_header(t_header* head, size_t size);
 void *ft_copy_memory(void *src, void *dest);
 
