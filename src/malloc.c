@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/01 17:49:12 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/02 13:27:27 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,26 @@ void 	*malloc(size_t size)
   if (size <= 0 || !ft_init_malloc(size))
     return NULL;
 
+     ft_print_zone(glob.tiny);
   //ft_printf("malloc %d: ft_find_empty_head\n", __LINE__);
   if((tmp = ft_find_empty_head(size)) != NULL)
   {
     //ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
 
+    // ft_print_zone(glob.tiny);
     tmp = ft_set_header(tmp, size);
+     ft_print_zone(glob.tiny);
     ft_printf("malloc %d: tmp: %p return malloc: %p\n", __LINE__, tmp, ((void*) tmp + TINY_SIZE));
     ft_printf("-----------\n");
-
-  ft_print_zone(glob.tiny);
-    return (void*) tmp + TINY_SIZE;
+    //exit(0);
+    return (void*) tmp + META;
   }
   else
   {
-    ft_printf("malloc: ft_find_empty_head NULL\n");
+    ft_printf("malloc: ft_find_empty_head NULL<<<<<<<<<<<<<<<<<<<\n");
   }
 
+    ft_printf("malloc: <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
 
   //LOG
   if (size < TINY_SIZE)
@@ -55,10 +58,12 @@ void 	*malloc(size_t size)
 }
 
 void free(void *ptr){
+  ft_printf("------------------\nmalloc %d: Go free\n", __LINE__);
   (void)ptr;
 }
 
 void *realloc(void *ptr, size_t size){
+  ft_printf("------------------\nmalloc %d: Go reqlloc\n", __LINE__);
   (void)ptr;
   (void)size;
   return ptr;
