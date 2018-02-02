@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 13:27:27 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/02 14:43:23 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@ void 	*malloc(size_t size)
   if (size <= 0 || !ft_init_malloc(size))
     return NULL;
 
-     ft_print_zone(glob.tiny);
-  //ft_printf("malloc %d: ft_find_empty_head\n", __LINE__);
+  //ft_print_zone(glob.tiny);
   if((tmp = ft_find_empty_head(size)) != NULL)
   {
-    //ft_printf("malloc %d: tmp : %p\n", __LINE__, tmp);
-
     // ft_print_zone(glob.tiny);
     tmp = ft_set_header(tmp, size);
-     ft_print_zone(glob.tiny);
+    ft_printf("print tiny\n");
+    ft_print_zone(glob.tiny);
+    ft_printf("print small\n");
+    ft_print_zone(glob.small);
     ft_printf("malloc %d: tmp: %p return malloc: %p\n", __LINE__, tmp, ((void*) tmp + TINY_SIZE));
     ft_printf("-----------\n");
-    //exit(0);
     return (void*) tmp + META;
   }
   else
@@ -63,10 +62,16 @@ void free(void *ptr){
 }
 
 void *realloc(void *ptr, size_t size){
-  ft_printf("------------------\nmalloc %d: Go reqlloc\n", __LINE__);
-  (void)ptr;
-  (void)size;
-  return ptr;
+  t_header  *h_dest;
+
+  ft_printf("------------------\nmalloc %d: Go realloc size:%d \n", __LINE__, size);
+  void *tmp;
+  tmp = malloc(size);
+  ft_copy_memory(ptr, tmp);
+  h_dest = tmp - META;
+  h_dest->size = size;
+
+  return tmp;
 }
 
 void show_alloc_mem(){
