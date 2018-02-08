@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 14:02:13 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 14:15:08 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/08 11:51:49 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void * ft_copy_memory(void *src, void *dest){
 	i = 0;
 	s1 = (unsigned char *)dest;
 	s2 = (unsigned char *)src;
+  ft_printf("ft_copy_memory %d: src %p\n", __LINE__, src);
+  ft_printf("ft_copy_memory %d: header %p\n", __LINE__, h_src);
+  ft_printf("ft_copy_memory %d: size %d\n", __LINE__, h_src->size);
 	while (i < h_src->size)
 	{
 		s1[i] = s2[i];

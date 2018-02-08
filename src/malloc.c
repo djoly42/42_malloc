@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 14:43:23 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/08 17:23:35 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,19 @@ void 	*malloc(size_t size)
     ft_print_zone(glob.tiny);
     ft_printf("print small\n");
     ft_print_zone(glob.small);
-    ft_printf("malloc %d: tmp: %p return malloc: %p\n", __LINE__, tmp, ((void*) tmp + TINY_SIZE));
+    ft_printf("malloc %d: size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*) tmp + META));
     ft_printf("-----------\n");
+
+    ft_printf("malloc %d: glob %p\n", __LINE__, &glob);
+    ft_printf("malloc %d: glob.tiny %p\n", __LINE__, &glob.tiny);
+    ft_printf("malloc %d: &glob.tiny++ %p\n", __LINE__, &(glob.tiny) + 1);
+    ft_printf("malloc %d: &glob.small %p\n",__LINE__, &glob.small);
+    if(glob.small != NULL){
+      ft_printf("malloc %d: glob.small.header %p\n",__LINE__, glob.small->header);
+      ft_printf("malloc %d: &glob.tiny++.header %p\n", __LINE__, PTR_ZONE(1)->header);
+    }
+    ft_printf("malloc %d: glob.large %p\n", __LINE__, &glob.large);
+
     return (void*) tmp + META;
   }
   else
@@ -57,7 +68,11 @@ void 	*malloc(size_t size)
 }
 
 void free(void *ptr){
-  ft_printf("------------------\nmalloc %d: Go free\n", __LINE__);
+  void *head;
+  ft_printf("------------------\nmalloc %d: Go free %p\n", __LINE__, ptr);
+  head = ptr - META;
+  ft_printf("------------------\nmalloc %d: head: %p\n", __LINE__, head);
+
   (void)ptr;
 }
 
@@ -67,6 +82,8 @@ void *realloc(void *ptr, size_t size){
   ft_printf("------------------\nmalloc %d: Go realloc size:%d \n", __LINE__, size);
   void *tmp;
   tmp = malloc(size);
+  if (ptr == NULL)
+    return tmp;
   ft_copy_memory(ptr, tmp);
   h_dest = tmp - META;
   h_dest->size = size;
@@ -75,5 +92,7 @@ void *realloc(void *ptr, size_t size){
 }
 
 void show_alloc_mem(){
+  ft_printf("------------------\nmalloc %d: Go show_alloc_mem \n", __LINE__);
+
   return;
 }

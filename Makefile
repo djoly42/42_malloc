@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/02/02 14:11:18 by djoly            ###   ########.fr        #
+#    Updated: 2018/02/08 11:39:54 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,12 @@ $(NAME): $(OBJS)
 		#@$(CC) $(FLAGS) $(SRCS) -o $(NAME) $(INC) $(LIB)
 		@echo "\033[91mCompiling \033[97m"
 		@make -C ft_printf
-		@$(CC) -shared -o $(NAME) $(OBJS) $(LIB)
+		@$(CC) -g -shared -o $(NAME) $(OBJS) $(LIB)
 		@ln -s $(NAME) libft_malloc.so
 		@echo "\033[90mDone \033[97m"
 .obj/%.o: src/%.c
 	mkdir -p .obj
-	@$(CC) -c $< -o $@ $(FLAGS) $(INC)
+	@$(CC) -g -c $< -o $@ $(FLAGS) $(INC)
 
 clean:
 	@echo "\033[92mDeleting\033[97m"

@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/02 15:38:05 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/08 11:25:45 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void ft_init_list_head(int type, t_zone* add_zone){
   glob.tiny->header = (void *) add_zone + sizeof(struct s_zone) ;
   tmp = glob.tiny->header;
   tmpfirst = glob.tiny->header;
+  //glob.tiny->header = tmpfirst;
     //ft_printf("ft_init %d: header first: %X\n", __LINE__,(unsigned  long)(glob.tiny->header));
   }
   else if(type == SMALL){
@@ -113,7 +114,6 @@ void ft_init_list_head(int type, t_zone* add_zone){
   }
   tmp->next = NULL;
   //ft_print_zone(glob.tiny);
-  glob.tiny->header = tmpfirst;
   ft_printf("ft_init %d: header first again : %X\n", __LINE__, (unsigned  long)(glob.tiny->header));
 
   //ft_print_zone(glob.tiny);
