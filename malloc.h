@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/08 17:23:22 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/08 17:36:05 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 #define SMALL_SIZE 1024
 #define META sizeof(struct s_header)
 #define PTR_ZONE(x) (*(&(glob.tiny) + x))
-#define PTR_LARGE (*(&(glob.tiny) + 2))
 
 typedef struct s_header{ // 24
   size_t          size;
