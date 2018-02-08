@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/08 17:43:09 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/08 18:05:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_header* ft_find_data(void *data){
   while (i < 3){
     tmp = PTR_ZONE->header + META;
     while(tmp){
-      if
+      if (tmp == data){
+
+      }
     }
     i++;
   }
