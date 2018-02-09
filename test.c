@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 15:23:36 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 16:05:03 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 //#include
 //#define malloc(x) NULL
 
+#include <stdlib.h>
+#include <time.h>
+
+int	rand_a_b(int	a,	int	b)
+{
+	return	rand()%(b-a) + a;
+}
 
 int main (int ac, char **av) {
 
@@ -43,6 +50,15 @@ int main (int ac, char **av) {
 	free(tab[6]);
 	free(tab[5]);
   tab[6] = malloc(700);
+
+	int i = 0;
+	int nombre_aleatoire = 0;
+	srand(time(NULL)); // initialisation de rand
+	for(i=0; i<400; i++){
+	nombre_aleatoire = rand_a_b(0, 1024);
+	ft_printf("%d ",nombre_aleatoire);
+	malloc(nombre_aleatoire);
+	}
   //free(m);
   return 0;
 }
