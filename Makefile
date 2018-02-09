@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/02/08 11:39:54 by djoly            ###   ########.fr        #
+#    Updated: 2018/02/09 15:20:47 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ NAME	= libft_malloc_$(HOSTTYPE).so
 FILES	= malloc.c \
 				ft_header.c\
 				ft_init.c\
-				ft_memory.c
+				ft_memory.c\
+				ft_print.c
 
 SRCS	= $(addprefix src/, $(FILES))
 OBJS	= $(SRCS:src/%.c=.obj/%.o)
