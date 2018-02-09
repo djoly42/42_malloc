@@ -6,30 +6,35 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/08 18:05:41 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 11:03:23 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 //ft_printf("line: %d\n", __LINE__);
-t_header* ft_find_data(void *data){
-  ft_printf("ft_header %d: ft_find_head: %d\n", __LINE__, head);
-  void *tmp;
-
+int ft_find_data(void *data){
+  ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__, data);
+  t_header *head;
   int i;
-
   i = 0;
-  while (i < 3){
-    tmp = PTR_ZONE->header + META;
-    while(tmp){
-      if (tmp == data){
 
+  while (i < 3){
+    if(PTR_ZONE(i) == NULL)
+    {
+      i++;
+      continue;
+    }
+    head = PTR_ZONE(i)->header;
+    while(head){
+      if (((void *)head + META) == data){
+        return 1;
       }
+      head = head->next;
     }
     i++;
   }
-
+  return 0;
 }
 
 t_header* ft_find_empty_head(size_t size){
@@ -55,7 +60,6 @@ t_header* ft_find_empty_head(size_t size){
       //ft_printf("line: %d\n", __LINE__);
         if(tmp->free != 1 && tmp->free != 0){
           ft_printf("ft_header %d: error dans tmp free \n", __LINE__);
-          exit(1);
         }
         if(tmp->free == 1){
           ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);

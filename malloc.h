@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/08 17:36:05 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 11:06:59 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_header* ft_find_empty_head(size_t size);
 int   ft_init_malloc(size_t size);
 t_header* ft_set_header(t_header* head, size_t size);
 void *ft_copy_memory(void *src, void *dest);
-
+int ft_find_data(void *data);
 
 void ft_print_head(t_header* h);
 void ft_print_zone(t_zone* zone);

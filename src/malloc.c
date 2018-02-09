@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/08 17:35:53 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 11:34:00 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void 	*malloc(size_t size)
   {
     // ft_print_zone(glob.tiny);
     tmp = ft_set_header(tmp, size);
-    ft_printf("print tiny\n");
-    ft_print_zone(glob.tiny);
-    ft_printf("print small\n");
-    ft_print_zone(glob.small);
+    // ft_printf("print tiny\n");
+    // ft_print_zone(glob.tiny);
+    // ft_printf("print small\n");
+    // ft_print_zone(glob.small);
     ft_printf("malloc %d: size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*) tmp + META));
     ft_printf("-----------\n");
 
@@ -68,12 +68,31 @@ void 	*malloc(size_t size)
 }
 
 void free(void *ptr){
-  void *head;
-  ft_printf("------------------\nmalloc %d: Go free %p\n", __LINE__, ptr);
-  head = ptr - META;
-  ft_printf("------------------\nmalloc %d: head: %p\n", __LINE__, head);
+  t_header *head;
+  ft_printf("malloc %d:----------------------\n", __LINE__);
+  ft_printf("malloc %d:|                     |\n", __LINE__);
+  ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
+  ft_printf("malloc %d: Go free meta %p\n", __LINE__, ptr - META);
+  ft_printf("malloc %d:|                     |\n", __LINE__);
+  ft_printf("malloc %d:----------------------\n", __LINE__);
+  if(ptr == NULL)
+  return;
+  if (ft_find_data(ptr))
+  {
+    ft_printf("malloc %d: data find %p\n", __LINE__, ptr);
+    head = ptr - META;
+    ft_printf("malloc %d: old value %d\n", __LINE__, head->size);
+    head->size = 0;
+    head->free = 1;
+  }
+  else
+  {
+    ft_printf("------------------\nmalloc %d: data not find %p\n", __LINE__, ptr);
+      ft_printf("print tiny\n");
+    ft_print_zone(glob.tiny);
+    ft_printf("print small\n");
+    ft_print_zone(glob.small);}
 
-  (void)ptr;
 }
 
 void *realloc(void *ptr, size_t size){
