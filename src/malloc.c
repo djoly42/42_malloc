@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 13:57:31 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 14:39:11 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int			ft_which_zone(size_t size)
 {
-	int		ret;
-
 	if (size <= TINY_SIZE)
 		return (0);
 	else if (size <= SMALL_SIZE)
@@ -30,7 +28,7 @@ void		*malloc(size_t size)
 
 	ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
 	i_zone = ft_which_zone(size);
-	if (size <= 0 || !ft_init_malloc(size))
+	if (size <= 0 || !ft_init_malloc(size, i_zone))
 		return (NULL);
 	//ft_print_zone(glob.tiny);
 	if ((tmp = ft_find_empty_head(size)) != NULL)
