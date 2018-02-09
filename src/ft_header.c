@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 15:29:58 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 15:34:31 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,10 @@ t_header*		ft_find_empty_head(int i_zone)
 	return (NULL);
 }
 
-t_header* ft_set_header(t_header* head, size_t size)
+t_header*		ft_set_header(t_header* head, size_t size)
 {
-  ft_printf("ft_header %d: ft_set_header\n", __LINE__);
-  ///ft_printf("set_free\n");
-  head->free = 0;
-//  ft_printf("set_size\n");
-  head->size = size;
-  return head;
+	ft_printf("ft_header %d: ft_set_header\n", __LINE__);
+	head->free = 0;
+	head->size = size;
+	return head;
 }

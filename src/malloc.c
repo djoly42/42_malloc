@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 15:26:27 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 15:37:14 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,39 +40,13 @@ void		*malloc(size_t size)
 		ft_printf("print small\n");
 		ft_print_zone(glob.small);
 		ft_printf("malloc %d: size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
-		ft_printf("-----------\n");
-		ft_printf("malloc %d: glob %p\n", __LINE__, &glob);
-		ft_printf("malloc %d: glob.tiny %p\n", __LINE__, &glob.tiny);
-		ft_printf("malloc %d: &glob.tiny++ %p\n", __LINE__, &(glob.tiny) + 1);
-		ft_printf("malloc %d: &glob.small %p\n", __LINE__, &glob.small);
-		if (glob.small != NULL)
-		{
-			ft_printf("malloc %d: glob.small.header %p\n",
-								__LINE__, glob.small->header);
-			ft_printf("malloc %d: &glob.tiny++.header %p\n",
-								__LINE__, PTR_ZONE(1)->header);
-		}
-		ft_printf("malloc %d: glob.large %p\n", __LINE__, &glob.large);
 		return ((void*)tmp + META);
 	}
 	else
 	{
-		ft_printf("malloc: ft_find_empty_head NULL<<<<<<<<<<<<<<<<<<<\n");
+		ft_printf("malloc %d: ft_find_empty_head NULL<<<<<<<<<<<<<<<<<<<\n", __LINE__);
 	}
-	ft_printf("malloc: <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
-	if (size < TINY_SIZE)
-		ft_printf("size < tiny\n");
-	if (glob.tiny == NULL)
-	{
-		ft_printf("tiny null\n");
-	}
-	else
-	{
-		ft_printf("tiny \n");
-	}
-	ft_printf("%d", PAGE_SIZE);
-	ft_printf("\nmeta : ");
-	ft_printf("%d", META);
+	ft_printf("malloc %d: size expect: %d return NULL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", __LINE__, size);
 	return (NULL);
 }
 
