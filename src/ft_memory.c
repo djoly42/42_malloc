@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 14:02:13 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/08 11:51:49 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 12:38:37 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,3 @@ void * ft_copy_memory(void *src, void *dest){
   h_src->size = 0;
 	return (dest);
 }
-//   ft_printf("ft_memory %d: ft_copy_memory ", __LINE__);
-//
-//   int       i;
-//
-//   h_src = src - META;
-//   h_dest = dest - META;
-//   i = 0;
-//   while(i < h_src->size){
-//     dest + i = src + i;
-//     i++;
-//   }
-//   h_dest->free = 0;
-//   h_dest->size = h_src->size;
-//   h_src->free = 1;
-//   h_src->size = 0;
-// }
