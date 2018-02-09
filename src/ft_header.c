@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 11:03:23 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 15:29:58 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,39 +37,26 @@ int ft_find_data(void *data){
   return 0;
 }
 
-t_header* ft_find_empty_head(size_t size){
-  ft_printf("ft_header %d: ft_find_empty_head\n", __LINE__);
-  t_header * tmp;
+t_header*		ft_find_empty_head(int i_zone)
+{
+	t_header		*tmp;
 
-  tmp = NULL;
-  if (size < TINY_SIZE){
-    ft_printf("line: %d\n", __LINE__);
-    tmp = glob.tiny->header;
-  }
-  else if(size >= TINY_SIZE && size < SMALL_SIZE){
-    ft_printf("line: %d\n", __LINE__);
-    tmp = glob.small->header;
-  }
-  else{
-    ft_printf("ft_header %d: ft_find_empty_head Gros malloc\n", __LINE__);
-
-  }
-    ft_printf("line: %d\n", __LINE__);
-    ft_printf("line: %d\n", __LINE__);
-    while (tmp != NULL){
-      //ft_printf("line: %d\n", __LINE__);
-        if(tmp->free != 1 && tmp->free != 0){
-          ft_printf("ft_header %d: error dans tmp free \n", __LINE__);
-        }
-        if(tmp->free == 1){
-          ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);
-          ft_print_head(tmp);
-          return tmp;
-        }
-        tmp = tmp->next;
-    }
-  ft_printf("ft_header %d: ft_find_empty_head return NULL\n", __LINE__);
-  return NULL;
+	ft_printf("ft_header %d: ft_find_empty_head\n", __LINE__);
+	tmp = PTR_ZONE(i_zone)->header;
+	while (tmp != NULL)
+	{
+		if(tmp->free != 1 && tmp->free != 0)
+			ft_printf("ft_header %d: error dans tmp free \n", __LINE__);
+		if(tmp->free == 1)
+		{
+			ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);
+			ft_print_head(tmp);
+			return (tmp);
+		}
+		tmp = tmp->next;
+	}
+	ft_printf("ft_header %d: ft_find_empty_head return NULL\n", __LINE__);
+	return (NULL);
 }
 
 t_header* ft_set_header(t_header* head, size_t size)

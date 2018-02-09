@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 15:08:35 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 15:31:58 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,30 +64,21 @@ typedef struct s_glob{
   t_zone *large;
 } t_glob;
 
-
 t_glob glob;
 
-void free(void *ptr);
-void *malloc(size_t size);
-void *ft_realloc(void *ptr, size_t size);
-void ft_show_alloc_mem(void);
+void				free(void *ptr);
+void*				malloc(size_t size);
+void*				ft_realloc(void *ptr, size_t size);
+void				ft_show_alloc_mem(void);
 
-t_header* ft_find_empty_head(size_t size);
-int   ft_init_malloc(size_t size, int i_zone);
-t_header* ft_set_header(t_header* head, size_t size);
-void *ft_copy_memory(void *src, void *dest);
-int ft_find_data(void *data);
+t_header*		ft_find_empty_head(int i_zone);
+int					ft_init_malloc(size_t size, int i_zone);
+t_header*		ft_set_header(t_header* head, size_t size);
+void*				ft_copy_memory(void *src, void *dest);
+int					ft_find_data(void *data);
 
-void ft_print_head(t_header* h);
-void ft_print_zone(t_zone* zone);
-void ft_print_data(void *p);
+void				ft_print_head(t_header* h);
+void				ft_print_zone(t_zone* zone);
+void				ft_print_data(void *p);
 
-/*
-
-void ft_putchar(char c);
-void ft_puthexa(size_t ptr);
-void ft_putnbr(int n);
-size_t ft_strlen(const char *s);
-void ft_putstr(char const *str);
-*/
 #endif
