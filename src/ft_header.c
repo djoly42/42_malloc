@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 15:34:31 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 17:02:47 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,32 @@ int ft_find_data(void *data){
 t_header*		ft_find_empty_head(int i_zone)
 {
 	t_header		*tmp;
+	t_zone			*zone;
+	int					i;
 
+	i = 0;
 	ft_printf("ft_header %d: ft_find_empty_head\n", __LINE__);
-	tmp = PTR_ZONE(i_zone)->header;
-	while (tmp != NULL)
+	if (PTR_ZONE(i_zone) == NULL)
+		return (NULL);
+	zone = PTR_ZONE(i_zone);
+	while(zone)
 	{
-		if(tmp->free != 1 && tmp->free != 0)
-			ft_printf("ft_header %d: error dans tmp free \n", __LINE__);
-		if(tmp->free == 1)
+		ft_printf("ft_header %d: zone %d\n", __LINE__, i);
+		tmp = zone->header;
+		while (tmp != NULL)
 		{
-			ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);
-			ft_print_head(tmp);
-			return (tmp);
+			if(tmp->free != 1 && tmp->free != 0)
+				ft_printf("ft_header %d: error dans tmp free \n", __LINE__);
+			if(tmp->free == 1)
+			{
+				ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);
+				ft_print_head(tmp);
+				return (tmp);
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
+		i++;
+		zone = zone->next;
 	}
 	ft_printf("ft_header %d: ft_find_empty_head return NULL\n", __LINE__);
 	return (NULL);

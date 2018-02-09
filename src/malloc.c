@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 16:08:20 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 17:43:33 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void		*malloc(size_t size)
 
 	ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
 	i_zone = ft_which_zone(size);
-	if (size <= 0 || !ft_init_malloc(size, i_zone, FALSE))
+
+	if (size <= 0 )
 		return (NULL);
-	//ft_print_zone(glob.tiny);
 	if ((tmp = ft_find_empty_head(i_zone)) != NULL)
 	{
 		// ft_print_zone(glob.tiny);
@@ -39,20 +39,33 @@ void		*malloc(size_t size)
 		// ft_print_zone(glob.tiny);
 		// ft_printf("print small\n");
 		// ft_print_zone(glob.small);
-		ft_printf("malloc %d: size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
+		ft_print_zone(0);
+		ft_print_zone(1);
+		ft_printf("malloc %d: OK MALLOC  size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 		return ((void*)tmp + META);
 	}
 	else
 	{
-		ft_printf("malloc %d: ft_find_empty_head NULL<<<<<<<<<<<<<<<<<<<\n", __LINE__);
-	}
-	ft_printf("malloc %d: size expect: %d return NULL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", __LINE__, size);
-	ft_printf("print tiny\n");
-	ft_print_zone(glob.tiny);
-	ft_printf("print small\n");
-	ft_print_zone(glob.small);
 
-	exit (1);
+		ft_init_malloc(size, i_zone);
+		ft_printf("malloc %d: fin init malloc\n", __LINE__);
+//		exit (1);
+		if ((tmp = ft_find_empty_head(i_zone)) != NULL)
+		{
+			// ft_print_zone(glob.tiny);
+			tmp = ft_set_header(tmp, size);
+			ft_print_zone(0);
+			ft_print_zone(1);
+			ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
+			return ((void*)tmp + META);
+		}
+	}
+	ft_printf("print tiny\n");
+	ft_print_zone(0);
+	ft_printf("print small\n");
+	ft_print_zone(1);
+
+	ft_printf("malloc %d: size expect: %d return NULL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", __LINE__, size);
 	return (NULL);
 }
 
@@ -81,9 +94,9 @@ void		free(void *ptr)
 		ft_printf("----------\nmalloc %d: data not find %p\n",
 							__LINE__, ptr);
 		ft_printf("print tiny\n");
-		ft_print_zone(glob.tiny);
+		ft_print_zone(0);
 		ft_printf("print small\n");
-		ft_print_zone(glob.small);
+		ft_print_zone(1);
 	}
 }
 

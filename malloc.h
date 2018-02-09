@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 15:54:58 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 16:49:48 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ typedef struct s_header{ // 24
 } t_header;
 
 typedef struct s_zone{
-  struct s_header *header;
-  struct s_map    *next;
-  size_t          size;
-  size_t          count;
+  struct s_header	*header;
+  struct s_zone		*next;
+  size_t					size;
+  size_t					count;
 } t_zone;
 
 typedef struct s_glob{
@@ -78,7 +78,7 @@ void*				ft_copy_memory(void *src, void *dest);
 int					ft_find_data(void *data);
 
 void				ft_print_head(t_header* h);
-void				ft_print_zone(t_zone* zone);
+void				ft_print_zone(int i_zone);
 void				ft_print_data(void *p);
 
 #endif

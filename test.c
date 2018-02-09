@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 16:05:03 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/09 17:42:38 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int main (int ac, char **av) {
 	int nombre_aleatoire = 0;
 	srand(time(NULL)); // initialisation de rand
 	for(i=0; i<400; i++){
-	nombre_aleatoire = rand_a_b(0, 1024);
-	ft_printf("%d ",nombre_aleatoire);
+	nombre_aleatoire = rand_a_b(0, 1000);
+	ft_printf("main %d:i: %d ",__LINE__, i);
+	ft_printf("main %d:%d ",__LINE__, nombre_aleatoire);
 	malloc(nombre_aleatoire);
 	}
   //free(m);
