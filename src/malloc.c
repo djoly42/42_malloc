@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/15 14:24:49 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 17:41:36 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void		*malloc(size_t size)
 		// ft_print_zone(glob.tiny);
 		// ft_printf("print small\n");
 		// ft_print_zone(glob.small);
-		ft_print_zone(0);
-		ft_print_zone(1);
+		//ft_print_zone(0);
+		//ft_print_zone(1);
 		ft_printf("malloc %d: OK MALLOC  size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 		return ((void*)tmp + META);
 	}
@@ -54,9 +54,9 @@ void		*malloc(size_t size)
 		{
 			// ft_print_zone(glob.tiny);
 			tmp = ft_set_header(tmp, size);
-			ft_print_zone(0);
-			ft_print_zone(1);
-			ft_print_zone(2);
+			//ft_print_zone(0);
+			//ft_print_zone(1);
+			//ft_print_zone(2);
 			ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 			return ((void*)tmp + META);
 		}
@@ -108,17 +108,24 @@ void		*realloc(void *ptr, size_t size)
 
 	ft_printf("------------------\nmalloc %d: Go realloc size:%d\n",
 						__LINE__, size);
-	tmp = malloc(size);
 	if (ptr == NULL)
-		return (tmp);
+		return malloc(size);
+	if (ptr && size <= 0)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	if (!ft_find_data(ptr))
+	{
+		ft_printf("------------------\nmalloc %d: return NULL\n", __LINE__);
+		return (NULL);
+	}
+	tmp = malloc(size);
 	ft_copy_memory(ptr, tmp);
 	h_dest = tmp - META;
 	h_dest->size = size;
+	free(ptr);
+	ft_printf("------------------\nmalloc %d: return realloc",
+						__LINE__);
 	return (tmp);
-}
-
-void	show_alloc_mem(void)
-{
-
-	ft_printf("-----------------\nmalloc %d: Go show_alloc_mem \n", __LINE__);
 }

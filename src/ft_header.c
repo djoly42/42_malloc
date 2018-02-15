@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 17:02:47 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:02:48 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int ft_find_data(void *data){
     head = PTR_ZONE(i)->header;
     while(head){
       if (((void *)head + META) == data){
-        return 1;
+        return TRUE;
       }
       head = head->next;
     }
     i++;
   }
-  return 0;
+  return FALSE;
 }
 
 t_header*		ft_find_empty_head(int i_zone)
