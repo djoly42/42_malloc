@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/15 17:42:00 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 18:08:49 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int main (int ac, char **av) {
   m = malloc(10);
 
 	ft_printf("main %d: end main\n", __LINE__);
-  *m = "WHAT";
+  *m = 'a';
 	ft_printf("test %d: %s ", __LINE__, m);
-
 
   tab[0] = malloc(1);
   tab[1] = malloc(2);
