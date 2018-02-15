@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 17:26:20 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 13:44:27 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,23 @@ void ft_init_list_head(int i_zone, t_zone* add_zone)
   //ft_print_zone(glob.tiny);
 }
 
-int		ft_init_zone(int i_zone)
+int		ft_page_calc(size_t size, int i_zone)
+{
+	ft_printf("ft_page_calc %d: zone %d\n", __LINE__, i_zone);
+	if (i_zone == 2)
+	{
+		int tmp = (PAGE_SIZE * ((size / PAGE_SIZE) + 1));
+		ft_printf("ft_page_calc %d: page large %d\n", __LINE__, tmp);
+		ft_printf("ft_page_calc %d: calc %d\n", __LINE__, size);
+		ft_printf("ft_page_calc %d: calc %d\n", __LINE__, (size / PAGE_SIZE ));
+		ft_printf("ft_page_calc %d: calc %d\n", __LINE__, ((size / PAGE_SIZE ) + 1));
+		ft_printf("ft_page_calc %d: calc %d\n", __LINE__, (PAGE_SIZE * ((size / PAGE_SIZE ) + 1)));
+		return (PAGE_SIZE * ((size / PAGE_SIZE ) + 1));
+	}
+	return MMAP_CALC(i_zone);
+}
+
+int		ft_init_zone(size_t size, int i_zone)
 {
 	ft_printf("ft_init %d: ft_init_zone: %d\n", __LINE__, i_zone);
 	ft_print_zone(0);
@@ -57,7 +73,7 @@ int		ft_init_zone(int i_zone)
 	if(PTR_ZONE(i_zone) == NULL)
 	{
 		ft_printf("\n\nft_init %d: init zone: %d\n", __LINE__, i);
-		if (!(PTR_ZONE(i_zone) = mmap(0, MMAP_CALC(i_zone), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
+		if (!(PTR_ZONE(i_zone) = mmap(0, ft_page_calc(size, i_zone), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
 		{
 			ft_printf("error in mmap");
 			return FALSE;
@@ -74,7 +90,7 @@ int		ft_init_zone(int i_zone)
 			zone = zone->next;
 		}
 		ft_printf("\n\nft_init %d: init zone: %d\n", __LINE__, i);
-		if (!(zone->next = mmap(0, MMAP_CALC(i_zone), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
+		if (!(zone->next = mmap(0, ft_page_calc(size, i_zone), PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
 		{
 			ft_printf("error in mmap");
 			return FALSE;
@@ -91,7 +107,7 @@ int ft_init_malloc(size_t size, int i_zone)
 {
  	ft_printf("ft_init %d : ft_init_malloc: size %d i_zone %d\n",
  						__LINE__, size, i_zone);
-	return ft_init_zone(i_zone);
+	return ft_init_zone(size, i_zone);
 }
 // 	if (PTR_ZONE(i_zone) == NULL)
 // 		return ft_init_zone(i_zone);

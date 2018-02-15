@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 17:42:38 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 13:51:30 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	rand_a_b(int	a,	int	b)
 int main (int ac, char **av) {
 
 	ft_printf("main %d: go main\n", __LINE__);
+	ft_printf("main %d: -----------------\n\n				START MALLOC LARGE\n\n----------------\n", __LINE__);
+	char	*t;
+	t = malloc(50000);
+	t = malloc(20000);
+	ft_printf("main %d: END MALLOC LARGE\n", __LINE__);
+	exit(0);
   char *m;
 	char *tab[10];
   m = malloc(10);
@@ -60,6 +66,7 @@ int main (int ac, char **av) {
 	ft_printf("main %d:%d ",__LINE__, nombre_aleatoire);
 	malloc(nombre_aleatoire);
 	}
+
   //free(m);
   return 0;
 }

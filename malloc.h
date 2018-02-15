@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 16:49:48 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 13:49:15 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@
 
 #define TINY_LIST_SIZE (MMAP_TINY / (META + TINY_SIZE)) // 107.78
 #define SMALL_LIST_SIZE (MMAP_SMALL / (META + SMALL_SIZE)) // 101.61
-#define LIST_CALC(x)		((x == 0) ? TINY_LIST_SIZE : ((x == 1) ? SMALL_LIST_SIZE : SMALL_LIST_SIZE))
+#define LARGE_LIST_SIZE 1// 101.61
+#define LIST_CALC(x)		((x == 0) ? TINY_LIST_SIZE : ((x == 1) ? SMALL_LIST_SIZE : LARGE_LIST_SIZE))
 
 typedef struct s_header{ // 24
   size_t          size;

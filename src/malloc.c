@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 17:43:33 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 13:50:02 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void		*malloc(size_t size)
 			tmp = ft_set_header(tmp, size);
 			ft_print_zone(0);
 			ft_print_zone(1);
+			ft_print_zone(2);
 			ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 			return ((void*)tmp + META);
 		}
