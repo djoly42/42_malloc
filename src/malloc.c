@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/15 13:50:02 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 14:24:49 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void		*realloc(void *ptr, size_t size)
 
 void	show_alloc_mem(void)
 {
+
 	ft_printf("-----------------\nmalloc %d: Go show_alloc_mem \n", __LINE__);
 }

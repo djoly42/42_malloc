@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/15 13:49:15 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/15 14:28:28 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ t_glob glob;
 
 void				free(void *ptr);
 void*				malloc(size_t size);
-void*				ft_realloc(void *ptr, size_t size);
-void				ft_show_alloc_mem(void);
+void*				realloc(void *ptr, size_t size);
+void				show_alloc_mem(void);
 
 t_header*		ft_find_empty_head(int i_zone);
 int					ft_init_malloc(size_t size, int i_zone);
