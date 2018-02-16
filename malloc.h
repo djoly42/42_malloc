@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 14:11:41 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 16:40:13 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 //152
 #define PAGE_SIZE getpagesize() //4096
-#define TINY 1
-#define SMALL 2
-#define LARGE 3
+#define TINY 0
+#define SMALL 1
+#define LARGE 2
 #define TRUE 1
 #define FALSE 0
 
@@ -75,7 +75,7 @@ void				show_alloc_mem(void);
 t_header*		ft_find_empty_head(int i_zone);
 int					ft_init_malloc(size_t size, int i_zone);
 t_header*		ft_set_header(t_header* head, size_t size);
-void*				ft_copy_memory(void *src, void *dest);
+void*				ft_copy_memory(void *src, void *dest, size_t new_size);
 void*				ft_find_data(void *data);
 int					ft_which_type(t_header *src);
 

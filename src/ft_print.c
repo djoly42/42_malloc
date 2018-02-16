@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 15:18:19 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/09 17:30:40 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 16:02:30 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void ft_print_zone(int i_zone)
 	while (zone)
 	{
 		tmp = zone->header;
-		ft_printf("ft_print %d: zone %d\n", __LINE__, j),
+		ft_printf("ft_print %d: zone %d index %d\n", __LINE__, i_zone, j),
 		ft_printf("ft_print %d:\theader\t\ttmp\t\tfree\tsize\ti\n", __LINE__);
 		while (tmp != NULL){
 			ft_printf("ft_print %d:\t%p\t%p\t%d\t%d\t%p\t%i", __LINE__, (unsigned  long)(zone->header),
