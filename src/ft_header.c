@@ -6,35 +6,66 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/15 16:02:48 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 14:21:36 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-//ft_printf("line: %d\n", __LINE__);
-int ft_find_data(void *data){
+void	*ft_find_data(void *data){
   ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__, data);
   t_header *head;
-  int i;
-  i = 0;
+  int i_zone;
+	t_zone			*zone;
 
-  while (i < 3){
-    if(PTR_ZONE(i) == NULL)
-    {
-      i++;
+	i_zone = -1;
+  while (i_zone < 3){
+    i_zone++;
+    if(PTR_ZONE(i_zone) == NULL)
       continue;
-    }
-    head = PTR_ZONE(i)->header;
-    while(head){
-      if (((void *)head + META) == data){
-        return TRUE;
-      }
-      head = head->next;
-    }
-    i++;
+		zone = PTR_ZONE(i_zone);
+		while(zone){
+    	head = zone->header;
+    	while(head){
+      	if (((void *)head + META) == data){
+        	return head;
+      	}
+      	head = head->next;
+    	}
+			zone = zone->next;
+		}
   }
-  return FALSE;
+  return (NULL);
+}
+
+int		ft_which_type(t_header *src){
+  ft_printf("ft_header %d: ft_which_type: %p\n", __LINE__, src);
+  t_header *head;
+  int i_zone;
+	t_zone			*zone;
+
+	i_zone = -1;
+  while (i_zone < 3){
+    i_zone++;
+  	ft_printf("ft_header %d: before if\n", __LINE__);
+    if(PTR_ZONE(i_zone) == NULL)
+      continue;
+  	ft_printf("ft_header %d: after if\n", __LINE__);
+		zone = PTR_ZONE(i_zone);
+  	ft_printf("ft_header %d: before while zone\n", __LINE__);
+		while(zone){
+    	head = zone->header;
+    	while(head){
+      	if (head == src){
+        	return i_zone;
+      	}
+      	head = head->next;
+    	}
+			zone = zone->next;
+		}
+  	ft_printf("ft_header %d: after while zone\n", __LINE__);
+  }
+  return (-1);
 }
 
 t_header*		ft_find_empty_head(int i_zone)

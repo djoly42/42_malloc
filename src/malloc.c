@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/15 17:41:36 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 14:24:15 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void		*malloc(size_t size)
 		// ft_print_zone(glob.small);
 		//ft_print_zone(0);
 		//ft_print_zone(1);
+	ft_printf("print tiny\n");
+	ft_print_zone(0);
 		ft_printf("malloc %d: OK MALLOC  size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 		return ((void*)tmp + META);
 	}
@@ -57,6 +59,8 @@ void		*malloc(size_t size)
 			//ft_print_zone(0);
 			//ft_print_zone(1);
 			//ft_print_zone(2);
+	ft_printf("print tiny\n");
+	ft_print_zone(0);
 			ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 			return ((void*)tmp + META);
 		}
@@ -82,7 +86,7 @@ void		free(void *ptr)
 	ft_printf("malloc %d:----------------------\n", __LINE__);
 	if (ptr == NULL)
 		return ;
-	if (ft_find_data(ptr))
+	if (ft_find_data(ptr) != NULL)
 	{
 		ft_printf("malloc %d: data find %p\n", __LINE__, ptr);
 		head = ptr - META;
@@ -115,16 +119,28 @@ void		*realloc(void *ptr, size_t size)
 		free(ptr);
 		return (NULL);
 	}
-	if (!ft_find_data(ptr))
+	if ((h_dest = ft_find_data(ptr)) == NULL)
 	{
 		ft_printf("------------------\nmalloc %d: return NULL\n", __LINE__);
 		return (NULL);
 	}
+	ft_printf("------------------\nmalloc %d: type size %d\n", __LINE__, ft_which_zone(size));
+	ft_printf("------------------\nmalloc %d: type size %d\n", __LINE__, ft_which_type(h_dest));
+	if(ft_which_zone(size) == ft_which_type(h_dest)){
+		ft_printf("------------------\nmalloc %d: type EQUAL\n", __LINE__);
+		h_dest->size = size;
+		ft_print_zone(0);
+		return ptr;
+	}
+	ft_printf("------------------\nmalloc %d: type NOT EQUAL\n", __LINE__);
 	tmp = malloc(size);
 	ft_copy_memory(ptr, tmp);
 	h_dest = tmp - META;
 	h_dest->size = size;
 	free(ptr);
+	ft_printf("print tiny\n");
+	ft_print_zone(0);
+	ft_print_zone(1);
 	ft_printf("------------------\nmalloc %d: return realloc",
 						__LINE__);
 	return (tmp);
