@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 16:56:26 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 17:42:47 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		*malloc(size_t size)
 	t_header	*tmp;
 	int				i_zone;
 
-	//ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
+	ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
 	i_zone = ft_which_zone(size);
 	//ft_printf("malloc %d: \n", __LINE__);
 
@@ -44,7 +44,7 @@ void		*malloc(size_t size)
 		//ft_print_zone(0);
 		//ft_print_zone(1);
 	//ft_printf("print tiny\n");
-	//ft_print_zone(0);
+		ft_print_zone(LARGE);
 		//ft_printf("malloc %d: OK MALLOC  size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 		return ((void*)tmp + META);
 	}
@@ -64,7 +64,7 @@ void		*malloc(size_t size)
 			//ft_print_zone(1);
 			//ft_print_zone(2);
 	//ft_printf("print tiny\n");
-	//ft_print_zone(0);
+		ft_print_zone(LARGE);
 		//	ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 			return ((void*)tmp + META);
 		}
@@ -75,7 +75,7 @@ void		*malloc(size_t size)
 	//ft_printf("print small\n");
 	//ft_print_zone(1);
 
-	//ft_printf("malloc %d: size expect: %d return NULL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", __LINE__, size);
+	ft_printf("malloc %d: size expect: %d return NULL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", __LINE__, size);
 	return (NULL);
 }
 
@@ -85,7 +85,7 @@ void		free(void *ptr)
 
 	// ft_printf("malloc %d:----------------------\n", __LINE__);
 	// ft_printf("malloc %d:|                     |\n", __LINE__);
-	 //ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
+	 ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
 	// ft_printf("malloc %d: Go free meta %p\n", __LINE__, ptr - META);
 	// ft_printf("malloc %d:|                     |\n", __LINE__);
 	// ft_printf("malloc %d:----------------------\n", __LINE__);
@@ -98,11 +98,13 @@ void		free(void *ptr)
 		//ft_printf("malloc %d: old value %d\n", __LINE__, head->size);
 		head->size = 0;
 		head->free = 1;
+		 ft_print_zone(2);
 	}
 	else
 	{
-		// ft_printf("----------\nmalloc %d: data not find %p\n",
-		// 					__LINE__, ptr);
+		 ft_printf("----------\nmalloc %d: data not find %p\n",
+		 					__LINE__, ptr);
+		 ft_print_zone(2);
 		// ft_printf("print tiny\n");
 		// ft_print_zone(0);
 		// ft_printf("print small\n");
@@ -111,7 +113,6 @@ void		free(void *ptr)
 }
 		// ft_print_zone(0);
 		// ft_print_zone(1);
-		// ft_print_zone(2);
 	// ft_printf("------------------\nmalloc %d: type size %d\n", __LINE__, ft_which_zone(size));
 		//ft_printf("------------------\nmalloc %d: type EQUAL\n", __LINE__);
 	//ft_printf("------------------\nmalloc %d: type NOT EQUAL\n", __LINE__);

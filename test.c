@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:16:45 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 14:23:26 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 17:44:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_strdup(const char *s1)
 		return (NULL);
 	while (count < length)
 	{
+		
 		dest[count] = s1[count];
 		count++;
 	}
@@ -51,6 +52,12 @@ int main (int ac, char **av) {
 	char	*t;
   char *m;
 	char *tab[10];
+
+	m = malloc(1024 * 16);
+	free(m);
+	m = malloc(1024 * 17);
+
+
   m = ft_strdup("what");
   ft_strdup("NO");
 	ft_printf("test %d: %s ", __LINE__, m);
