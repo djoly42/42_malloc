@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 17:42:47 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 17:57:15 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,16 @@ void		*malloc(size_t size)
 void		free(void *ptr)
 {
 	t_header	*head;
-
-	// ft_printf("malloc %d:----------------------\n", __LINE__);
-	// ft_printf("malloc %d:|                     |\n", __LINE__);
-	 ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
-	// ft_printf("malloc %d: Go free meta %p\n", __LINE__, ptr - META);
-	// ft_printf("malloc %d:|                     |\n", __LINE__);
-	// ft_printf("malloc %d:----------------------\n", __LINE__);
+	ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
 	if (ptr == NULL)
 		return ;
-	if (ft_find_data(ptr) != NULL)
+	if ((head = ft_find_data(ptr)) != NULL)
 	{
-		//ft_printf("malloc %d: data find %p\n", __LINE__, ptr);
-		head = ptr - META;
-		//ft_printf("malloc %d: old value %d\n", __LINE__, head->size);
 		head->size = 0;
 		head->free = 1;
-		 ft_print_zone(2);
+		if (ft_which_type(head) == LARGE)
+			erase_large(head);
+		ft_print_zone(2);
 	}
 	else
 	{

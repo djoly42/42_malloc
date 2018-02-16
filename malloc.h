@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 16:40:13 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/16 17:50:58 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 #define DATA_CALC(x) ((x == 0) ? TINY_SIZE : ((x == 1) ? SMALL_SIZE : SMALL_SIZE))
 
 #define META sizeof(struct s_header) // 24
+#define META_LARGE sizeof(struct s_header_large) // 24
+#define META_CALC(x)		((x <= 1) ? META : META_LARGE)
 
 #define PTR_ZONE(x) (*(&(glob.tiny) + x))
 #define MMAP_TINY		PAGE_SIZE * 4
@@ -51,6 +53,14 @@ typedef struct s_header{ // 24
   int             free;
   struct s_header *next;
 } t_header;
+
+
+typedef struct s_header_large{ // 24
+	size_t					size_mmap;
+  size_t          size;
+  int             free;
+  struct s_header_large *next;
+} t_header_large;
 
 typedef struct s_zone{
   struct s_header	*header;
