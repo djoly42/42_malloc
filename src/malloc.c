@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 18:11:13 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 14:33:15 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,17 @@ void		*malloc(size_t size)
 	t_header	*tmp;
 	int				i_zone;
 
-	ft_printf("------------------\nmalloc %d: Go malloc: %u\n", __LINE__, size);
+	ft_printf("------------------\nmalloc %d: Go malloc: %u  size header %u  size zone %u\n", __LINE__, size, META, SIZE_STRUCT_ZONE);
 	i_zone = ft_which_zone(size);
 	//ft_printf("malloc %d: \n", __LINE__);
 
 	if (size <= 0 )
 		return (NULL);
-	if ((tmp = ft_find_empty_head(i_zone)) != NULL)
+	if ((tmp = ft_find_empty_head(i_zone, size)) != NULL)
 	{
-		// ft_print_zone(glob.tiny);
-	//ft_printf("malloc %d: \n", __LINE__);
-		tmp = ft_set_header(tmp, size);
-		// ft_printf("print tiny\n");
-		// ft_print_zone(glob.tiny);
-		// ft_printf("print small\n");
-		// ft_print_zone(glob.small);
-		//ft_print_zone(0);
-		//ft_print_zone(1);
-	//ft_printf("print tiny\n");
-		ft_print_zone(LARGE);
+		tmp = ft_set_header(tmp, size, i_zone);
+		//ft_print_zone(TINY);
+		// ft_print_÷zone(SMALL);
 		//ft_printf("malloc %d: OK MALLOC  size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 		return ((void*)tmp + META);
 	}
@@ -55,17 +47,18 @@ void		*malloc(size_t size)
 		ft_init_malloc(size, i_zone);
 		//ft_printf("malloc %d: fin init malloc\n", __LINE__);
 //		exit (1);
-		if ((tmp = ft_find_empty_head(i_zone)) != NULL)
+		if ((tmp = ft_find_empty_head(i_zone, size)) != NULL)
 		{
 	//ft_printf("malloc %d: \n", __LINE__);
 			// ft_print_zone(glob.tiny);
-			tmp = ft_set_header(tmp, size);
+			tmp = ft_set_header(tmp, size, i_zone);
 			//ft_print_zone(0);
 			//ft_print_zone(1);
 			//ft_print_zone(2);
 	//ft_printf("print tiny\n");
-		ft_print_zone(LARGE);
-		//	ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
+		//ft_print_zone(TINY);
+		// ft_print_zone(SMALL);
+		//ft_printf("malloc %d: OK MALLOC size: %d header: %p return malloc: %p\n", __LINE__, size, tmp, ((void*)tmp + META));
 			return ((void*)tmp + META);
 		}
 	}
@@ -74,32 +67,33 @@ void		*malloc(size_t size)
 	//ft_print_zone(0);
 	//ft_printf("print small\n");
 	//ft_print_zone(1);
+		//ft_print_zone(LARGE);
 
 	ft_printf("malloc %d: size expect: %d return NULL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", __LINE__, size);
 	return (NULL);
 }
 
-void		erase
+//void		erase
 
 void		free(void *ptr)
 {
 	t_header	*head;
-	ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
+	//ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
 	if (ptr == NULL)
 		return ;
 	if ((head = ft_find_data(ptr)) != NULL)
 	{
 		head->size = 0;
 		head->free = 1;
-		if (ft_which_type(head) == LARGE)
-			erase_large(head);
-		ft_print_zone(2);
+	//	if (ft_which_type(head) == LARGE)
+		//	erase_large(head);
+		//ft_print_zone(2);
 	}
 	else
 	{
-		 ft_printf("----------\nmalloc %d: data not find %p\n",
-		 					__LINE__, ptr);
-		 ft_print_zone(2);
+		 //ft_printf("----------\nmalloc %d: data not find %p\n",
+		// 					__LINE__, ptr);
+		 //ft_print_zone(2);
 		// ft_printf("print tiny\n");
 		// ft_print_zone(0);
 		// ft_printf("print small\n");
@@ -118,18 +112,27 @@ int			check_realloc(void *ptr, size_t size, t_header **dest)
 		return FALSE;
 		if (ptr && size <= 0)
 		{
+			ft_printf("malloc %d: free ptr %x  size:%d  h_dest %x\n",
+						__LINE__, ptr,  size, *dest);
 			free(ptr);
 			return FALSE;
 		}
 		if ((*dest = ft_find_data(ptr)) == NULL)
 		{
+			ft_printf("malloc %d: ft_find_data NULL\n",
+						__LINE__);
 			return FALSE;
 		}
+			ft_printf("malloc %d: return true\n",
+						__LINE__);
 	return TRUE;
 }
 
 void		*realloc_large(void *ptr, size_t size, t_header	*h_dest)
 {
+	ft_print_zone(LARGE);
+	ft_printf("malloc %d: realloc large ptr %p size:%d  h_dest %x\n",
+						__LINE__, ptr,  size, h_dest);
 	void	*tmp;
 	if (h_dest->size < size)
 	{
@@ -148,8 +151,8 @@ void		*realloc_large(void *ptr, size_t size, t_header	*h_dest)
 
 void		*realloc(void *ptr, size_t size)
 {
-	//ft_printf("------------------\nmalloc %d: Go realloc ptr %p size:%d\n",
-		//				__LINE__, ptr,  size);
+	ft_printf("------------------\nmalloc %d: Go realloc ptr %p size:%d\n",
+						__LINE__, ptr,  size);
 	t_header	*h_dest;
 	void			*tmp;
 

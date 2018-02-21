@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:56:58 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 17:50:58 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 13:04:42 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,26 @@
 
 #define TINY_SIZE 128
 #define SMALL_SIZE 1024
-#define DATA_CALC(x) ((x == 0) ? TINY_SIZE : ((x == 1) ? SMALL_SIZE : SMALL_SIZE))
+#define DATA_CALC(x) ((x == 0) ? TINY_SIZE : SMALL_SIZE )
 
 #define META sizeof(struct s_header) // 24
-#define META_LARGE sizeof(struct s_header_large) // 24
-#define META_CALC(x)		((x <= 1) ? META : META_LARGE)
+#define SIZE_STRUCT_ZONE  sizeof(struct s_zone) // 24
+//#define META_LARGE sizeof(struct s_header_large) // 24
+//#define META_CALC(x)		((x <= 1) ? META : META_LARGE)
 
 #define PTR_ZONE(x) (*(&(glob.tiny) + x))
 #define MMAP_TINY		PAGE_SIZE * 4
-#define MMAP_SMALL	PAGE_SIZE * 26
-#define MMAP_LARGE	PAGE_SIZE * 26
-#define MMAP_CALC(x) ((x == 0) ? MMAP_TINY : ((x == 1) ? MMAP_SMALL : MMAP_LARGE))
+#define MMAP_SMALL	PAGE_SIZE * 26 //106 496
+#define MMAP_CALC(x) ((x == 0) ? MMAP_TINY : MMAP_SMALL)
 
 #define TINY_LIST_SIZE (MMAP_TINY / (META + TINY_SIZE)) // 107.78
-#define SMALL_LIST_SIZE (MMAP_SMALL / (META + SMALL_SIZE)) // 101.61
+#define SMALL_LIST_SIZE ((MMAP_SMALL / (META + SMALL_SIZE)) / 2) // 101.61
 #define LARGE_LIST_SIZE 1// 101.61
 #define LIST_CALC(x)		((x == 0) ? TINY_LIST_SIZE : ((x == 1) ? SMALL_LIST_SIZE : LARGE_LIST_SIZE))
 
-typedef struct s_header{ // 24
+typedef struct s_header{ // 24 //32
   size_t          size;
+	size_t					first_size;
   int             free;
   struct s_header *next;
 } t_header;
@@ -82,9 +83,9 @@ void*				malloc(size_t size);
 void*				realloc(void *ptr, size_t size);
 void				show_alloc_mem(void);
 
-t_header*		ft_find_empty_head(int i_zone);
+t_header*		ft_find_empty_head(int i_zone, size_t size);
 int					ft_init_malloc(size_t size, int i_zone);
-t_header*		ft_set_header(t_header* head, size_t size);
+t_header*		ft_set_header(t_header* head, size_t size, int i_zone);
 void*				ft_copy_memory(void *src, void *dest, size_t new_size);
 void*				ft_find_data(void *data);
 int					ft_which_type(t_header *src);

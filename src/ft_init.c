@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 13:24:43 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 15:28:35 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 12:07:57 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,8 @@ void ft_init_list_head(int i_zone, t_zone* add_zone)
 
 int		ft_page_calc(size_t size, int i_zone)
 {
-	//ft_printf("ft_page_calc %d: zone %d\n", __LINE__, i_zone);
-	if (i_zone == 2)
-	{
-		//int tmp = (PAGE_SIZE * ((size / PAGE_SIZE) + 1));
-		// ft_printf("ft_page_calc %d: page large %d\n", __LINE__, tmp);
-		// ft_printf("ft_page_calc %d: calc %d\n", __LINE__, size);
-		// ft_printf("ft_page_calc %d: calc %d\n", __LINE__, (size / PAGE_SIZE ));
-		// ft_printf("ft_page_calc %d: calc %d\n", __LINE__, ((size / PAGE_SIZE ) + 1));
-		// ft_printf("ft_page_calc %d: calc %d\n", __LINE__, (PAGE_SIZE * ((size / PAGE_SIZE ) + 1)));
+	if (i_zone == LARGE)
 		return (PAGE_SIZE * ((size / PAGE_SIZE ) + 1));
-	}
 	return MMAP_CALC(i_zone);
 }
 

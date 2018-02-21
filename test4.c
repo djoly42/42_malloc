@@ -14,5 +14,5 @@ int main()
 	free(NULL);
 	free((void*)addr + 5);
 	if (realloc((void*)addr + 5, 100) == NULL)
-		print("Bonjour\n");
+		print("Bonjours\n");
 }

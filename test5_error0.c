@@ -2,9 +2,9 @@
 int		main()
 {
 	char * m;
-	malloc(1024);
+	m = malloc(1024);
 	malloc(1024 * 32);
-	m = malloc(1024 * 1024);
+	malloc(1024 * 1024);
 	malloc(1024 * 1024 * 16);
 	malloc(1024 * 1024 * 128);
 	free(m);

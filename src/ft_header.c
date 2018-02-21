@@ -6,14 +6,14 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/16 15:27:01 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 14:46:29 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 void	*ft_find_data(void *data){
-  //ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__, data);
+  ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__, data);
   t_header *head;
   int i_zone;
 	t_zone			*zone;
@@ -35,6 +35,7 @@ void	*ft_find_data(void *data){
 			zone = zone->next;
 		}
   }
+  ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__);
   return (NULL);
 }
 
@@ -68,7 +69,7 @@ int		ft_which_type(t_header *src){
   return (-1);
 }
 
-t_header*		ft_find_empty_head(int i_zone)
+t_header*		ft_find_empty_head(int i_zone, size_t size)
 {
 	t_header		*tmp;
 	t_zone			*zone;
@@ -85,10 +86,14 @@ t_header*		ft_find_empty_head(int i_zone)
 		tmp = zone->header;
 		while (tmp != NULL)
 		{
-			if(tmp->free == 1)
+			if(i_zone != LARGE && tmp->free == 1)
 			{
 				//ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);
 				//ft_print_head(tmp);
+				return (tmp);
+			}
+			else if (tmp->free == 1 && (tmp->first_size == 0 || tmp->first_size >= size))
+			{
 				return (tmp);
 			}
 			tmp = tmp->next;
@@ -100,10 +105,13 @@ t_header*		ft_find_empty_head(int i_zone)
 	return (NULL);
 }
 
-t_header*		ft_set_header(t_header* head, size_t size)
+t_header*		ft_set_header(t_header* head, size_t size, int i_zone)
 {
 	//ft_printf("ft_header %d: ft_set_header\n", __LINE__);
 	head->free = 0;
 	head->size = size;
+	if(i_zone == LARGE && head->first_size == 0){
+		head->first_size = size;
+	}
 	return head;
 }
