@@ -6,14 +6,14 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/21 14:46:29 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 15:20:41 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
 void	*ft_find_data(void *data){
-  ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__, data);
+  ft_printf("ft_header %d: ft_find_data: %p\n", __LINE__, data);
   t_header *head;
   int i_zone;
 	t_zone			*zone;
@@ -21,13 +21,17 @@ void	*ft_find_data(void *data){
 	i_zone = -1;
   while (i_zone < 3){
     i_zone++;
+  	//ft_printf("ft_header %d: while i zone %d\n", __LINE__, i_zone);
     if(PTR_ZONE(i_zone) == NULL)
       continue;
 		zone = PTR_ZONE(i_zone);
 		while(zone){
+  	//ft_printf("ft_header %d: while zone %p\n", __LINE__, zone);
     	head = zone->header;
     	while(head){
+  		//	ft_printf("ft_header %d: while head %p\n", __LINE__, head);
       	if (((void *)head + META) == data){
+  			//	ft_printf("ft_header %d: ft_find_data return %p\n", __LINE__, head);
         	return head;
       	}
       	head = head->next;
@@ -35,7 +39,11 @@ void	*ft_find_data(void *data){
 			zone = zone->next;
 		}
   }
-  ft_printf("ft_header %d: ft_find_head: %p\n", __LINE__);
+
+	// ft_print_zone(TINY);
+	// ft_print_zone(SMALL);
+	// ft_print_zone(LARGE);
+  ft_printf("ft_header %d: ft_find_data return NULL data search %p\n", __LINE__, data);
   return (NULL);
 }
 

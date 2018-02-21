@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/21 14:33:15 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 15:16:55 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		*malloc(size_t size)
 void		free(void *ptr)
 {
 	t_header	*head;
-	//ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
+	ft_printf("malloc %d: Go free %p\n", __LINE__, ptr);
 	if (ptr == NULL)
 		return ;
 	if ((head = ft_find_data(ptr)) != NULL)
@@ -91,8 +91,8 @@ void		free(void *ptr)
 	}
 	else
 	{
-		 //ft_printf("----------\nmalloc %d: data not find %p\n",
-		// 					__LINE__, ptr);
+		 ft_printf("malloc %d: FREE data not find %p\n",
+		 					__LINE__, ptr);
 		 //ft_print_zone(2);
 		// ft_printf("print tiny\n");
 		// ft_print_zone(0);
@@ -101,7 +101,6 @@ void		free(void *ptr)
 	}
 }
 		// ft_print_zone(0);
-		// ft_print_zone(1);
 	// ft_printf("------------------\nmalloc %d: type size %d\n", __LINE__, ft_which_zone(size));
 		//ft_printf("------------------\nmalloc %d: type EQUAL\n", __LINE__);
 	//ft_printf("------------------\nmalloc %d: type NOT EQUAL\n", __LINE__);
