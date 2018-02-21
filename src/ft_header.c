@@ -6,14 +6,14 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:17:55 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/21 15:20:41 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/21 17:02:42 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
+//  ft_printf("ft_header %d: ft_find_data: %p\n", __LINE__, data);
 void	*ft_find_data(void *data){
-  ft_printf("ft_header %d: ft_find_data: %p\n", __LINE__, data);
   t_header *head;
   int i_zone;
 	t_zone			*zone;
@@ -43,7 +43,7 @@ void	*ft_find_data(void *data){
 	// ft_print_zone(TINY);
 	// ft_print_zone(SMALL);
 	// ft_print_zone(LARGE);
-  ft_printf("ft_header %d: ft_find_data return NULL data search %p\n", __LINE__, data);
+  //ft_printf("ft_header %d: ft_find_data return NULL data search %p\n", __LINE__, data);
   return (NULL);
 }
 
@@ -77,6 +77,7 @@ int		ft_which_type(t_header *src){
   return (-1);
 }
 
+//	ft_printf("ft_header %d: ft_find_empty_head %u  %u\n", __LINE__, i_zone , size);
 t_header*		ft_find_empty_head(int i_zone, size_t size)
 {
 	t_header		*tmp;
@@ -84,32 +85,23 @@ t_header*		ft_find_empty_head(int i_zone, size_t size)
 	int					i;
 
 	i = 0;
-	//ft_printf("ft_header %d: ft_find_empty_head\n", __LINE__);
 	if (PTR_ZONE(i_zone) == NULL)
 		return (NULL);
 	zone = PTR_ZONE(i_zone);
 	while(zone)
 	{
-		//ft_printf("ft_header %d: zone %d\n", __LINE__, i);
 		tmp = zone->header;
 		while (tmp != NULL)
 		{
 			if(i_zone != LARGE && tmp->free == 1)
-			{
-				//ft_printf("ft_header %d: ft_find_empty_head return tmp\n",__LINE__);
-				//ft_print_head(tmp);
 				return (tmp);
-			}
 			else if (tmp->free == 1 && (tmp->first_size == 0 || tmp->first_size >= size))
-			{
 				return (tmp);
-			}
 			tmp = tmp->next;
 		}
 		i++;
 		zone = zone->next;
 	}
-	//ft_printf("ft_header %d: ft_find_empty_head return NULL\n", __LINE__);
 	return (NULL);
 }
 
