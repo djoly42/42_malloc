@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 15:01:47 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/22 10:56:35 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/22 14:36:30 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				find_fill_header(int i_zone)
 	return (FALSE);
 }
 
-void			print_zone(int i_zone)
+void			print_zone(int i_zone, int *total)
 {
 	t_header	*tmp;
 	t_zone		*zone;
@@ -63,8 +63,11 @@ void			print_zone(int i_zone)
 		while (tmp != NULL)
 		{
 			if (tmp->free == 0)
-				ft_printf("0x%X - 0x%X : %d octets\n", tmp + META,
+			{
+				ft_printf("0x%X - 0x%X\t: %d octets\n", tmp + META,
 				tmp + META + tmp->size, tmp->size);
+				*total = *total + tmp->size;
+			}
 			tmp = tmp->next;
 		}
 		zone = zone->next;
@@ -77,7 +80,11 @@ void			print_zone(int i_zone)
 
 void			show_alloc_mem(void)
 {
-	print_zone(0);
-	print_zone(1);
-	print_zone(2);
+	int total;
+
+	total = 0;
+	print_zone(0, &total);
+	print_zone(1, &total);
+	print_zone(2, &total);
+	ft_printf("Total : %u octets\n", total);
 }
