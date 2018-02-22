@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 14:22:49 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/22 13:32:13 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/22 14:21:16 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 **	ft_printf("------------------\nmalloc %d: Go malloc: %u  size header %u
 **  size zone %u\n", __LINE__, size, META, SIZE_STRUCT_ZONE);
+**				ft_printf("malloc %d: malloc addr %p\n",
+**					__LINE__, ((void*)tmp + META));
 */
 
 void			*malloc(size_t size)
@@ -39,9 +41,6 @@ void			*malloc(size_t size)
 		if ((tmp = ft_find_empty_head(i_zone, size)) != NULL)
 		{
 			tmp = ft_set_header(tmp, size, i_zone);
-			if (PRINT == 1)
-				ft_printf("malloc %d: malloc addr %p\n",
-					__LINE__, ((void*)tmp + META));
 			return ((void*)tmp + META);
 		}
 	}
@@ -65,7 +64,6 @@ void			free(void *ptr)
 	}
 	else
 	{
-
 		if (PRINT == 1)
 		{
 			ft_printf("malloc %d: free addr not find %p\n", __LINE__, ptr);
