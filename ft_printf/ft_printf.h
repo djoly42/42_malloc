@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 17:33:26 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/21 16:20:31 by djoly            ###   ########.fr       */
+/*   Updated: 2018/02/22 11:57:02 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ struct					s_env
 	int					arglen;
 	long long int		nbneg;
 };
-
 
 void					before_nbrd_prec(t_env *env);
 void					fonct_error(t_env *env);

@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/02/21 18:07:32 by djoly            ###   ########.fr        #
+#    Updated: 2018/02/22 13:40:48 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ FILES	= malloc.c \
 
 SRCS	= $(addprefix src/, $(FILES))
 OBJS	= $(SRCS:src/%.c=.obj/%.o)
-#INC		= -I include -I .
 INC		= -I ft_printf -I .
 LIB		= -L ft_printf -lftprintf
 FLAGS	= -Wall -Wextra -Werror
@@ -33,20 +32,16 @@ CC		= gcc
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		#@$(CC) $(FLAGS) $(SRCS) -o $(NAME) $(INC) $(LIB)
 		@echo "\033[91mCompiling \033[97m"
 		@make -C ft_printf
-		@$(CC) -g -shared -o $(NAME) $(OBJS) $(LIB)
-		@echo "test" $(NAME)
-		if [ ! -f ./malloc.h ]; then
-			echo "dans"
-		fi
-		@echo "test" $(NAME)
-		@ln -s $(NAME) libft_malloc.so
+		@$(CC) -g -shared -o $(NAME) $(OBJS) $(LIB) $(FLAGS)
+#ifeq ("$(wildcard libft_malloc.so)","")
+	@ln -sf $(NAME) libft_malloc.so
+#endif
 		@echo "\033[90mDone \033[97m"
 .obj/%.o: src/%.c
 	mkdir -p .obj
-	@$(CC) -g -c $< -o $@ $(FLAGS) $(INC)
+	@$(CC) -g -c $< -o $@ $(FLAGS) $(INC) $(FLAGS)
 
 clean:
 	@echo "\033[92mDeleting\033[97m"
