@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/02/22 13:40:48 by djoly            ###   ########.fr        #
+#    Updated: 2018/02/22 13:44:46 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,7 @@ $(NAME): $(OBJS)
 		@echo "\033[91mCompiling \033[97m"
 		@make -C ft_printf
 		@$(CC) -g -shared -o $(NAME) $(OBJS) $(LIB) $(FLAGS)
-#ifeq ("$(wildcard libft_malloc.so)","")
-	@ln -sf $(NAME) libft_malloc.so
-#endif
+		@ln -sf $(NAME) libft_malloc.so
 		@echo "\033[90mDone \033[97m"
 .obj/%.o: src/%.c
 	mkdir -p .obj
