@@ -1,1 +1,0 @@
-gcc -o  test_show  test_show.c  -L. -lft_malloc

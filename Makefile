@@ -6,7 +6,7 @@
 #    By: djoly <djoly@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 13:53:42 by djoly             #+#    #+#              #
-#    Updated: 2018/02/22 13:44:46 by djoly            ###   ########.fr        #
+#    Updated: 2018/02/22 13:54:09 by djoly            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME): $(OBJS)
 		@echo "\033[90mDone \033[97m"
 .obj/%.o: src/%.c
 	mkdir -p .obj
-	@$(CC) -g -c $< -o $@ $(FLAGS) $(INC) $(FLAGS)
+	@$(CC) -c $< -o $@ $(FLAGS) $(INC) $(FLAGS)
 
 clean:
 	@echo "\033[92mDeleting\033[97m"
