@@ -6,7 +6,7 @@
 /*   By: djoly <djoly@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 15:01:47 by djoly             #+#    #+#             */
-/*   Updated: 2018/02/22 14:36:30 by djoly            ###   ########.fr       */
+/*   Updated: 2018/03/01 14:33:38 by djoly            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void			print_zone_name(int i_zone)
 		ft_printf("LARGE : ");
 }
 
-int				find_fill_header(int i_zone)
+void			find_fill_header(int i_zone)
 {
 	t_header	*tmp;
 	t_zone		*zone;
 
 	if (PTR_ZONE(i_zone) == NULL)
-		return (FALSE);
+		return ;
 	zone = PTR_ZONE(i_zone);
 	while (zone)
 	{
@@ -36,12 +36,15 @@ int				find_fill_header(int i_zone)
 		while (tmp != NULL)
 		{
 			if (tmp->free == 0)
-				return (TRUE);
+			{
+				print_zone_name(i_zone);
+				ft_printf("0x%X\n", zone->header);
+				return ;
+			}
 			tmp = tmp->next;
 		}
 		zone = zone->next;
 	}
-	return (FALSE);
 }
 
 void			print_zone(int i_zone, int *total)
@@ -52,11 +55,7 @@ void			print_zone(int i_zone, int *total)
 	if (PTR_ZONE(i_zone) == NULL)
 		return ;
 	zone = PTR_ZONE(i_zone);
-	if (find_fill_header(i_zone))
-	{
-		print_zone_name(i_zone);
-		ft_printf("0x%X\n", zone->header);
-	}
+	find_fill_header(i_zone);
 	while (zone)
 	{
 		tmp = zone->header;
